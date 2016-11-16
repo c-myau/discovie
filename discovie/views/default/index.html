@@ -1,52 +1,155 @@
-{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
 {{extend 'layout.html'}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-{{block header}}
-    <header class="container-fluid background">
-      <div class="jumbotron text-center">
-        {{if response.title:}}
-        <h1>{{=response.title}}
-          <small>{{=response.subtitle or ''}}</small></h1>
-        {{pass}}
-      </div>
-    </header>
-{{end}}
+    <title>Discovie</title>
 
-{{if 'message' in globals():}}
-<h2>{{=message}}</h2>
-<p class="lead">{{=T('How did you get here?')}}</p>
-<ol>
-  <li>{{=T('You are successfully running web2py')}}</li>
-  <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
-  <li>{{=XML(T('Which called the function %s located in the file %s',
-    (A(request.function+'()',_href='#'),
-    A('web2py/applications/%(application)s/controllers/%(controller)s.py' % request,
-    _href=URL('admin','default','peek', args=(request.application,'controllers',request.controller+'.py'))))))}}</li>
-  <li>{{=XML(T('The output of the file is a dictionary that was rendered by the view %s',
-    A('web2py/applications/%(application)s/views/%(controller)s/index.html' % request,
-    _href=URL('admin','default','peek',args=(request.application,'views',request.controller,'index.html')))))}}</li>
-  <li>{{=T('You can modify this application and adapt it to your needs')}}</li>
-</ol>
-{{elif 'content' in globals():}}
-{{=content}}
-{{else:}}
-{{=BEAUTIFY(response._vars)}}
-{{pass}}
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-{{block right_sidebar}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title"><a class="btn-block"
-      href="{{=URL('admin','default','index')}}">
-      <i class="glyphicon glyphicon-cog"></i>
-      {{=T("admin")}}
-    </a></h3></div>
-  <div class="panel-body">
-    {{=T("Don't know what to do?")}}
-  </div>
-  <ul class="list-group">
-    <li class="list-group-item">{{=A(T("Online examples"), _href=URL('examples','default','index'))}}</li>
-    <li class="list-group-item"><a href="http://web2py.com">web2py.com</a></li>
-    <li class="list-group-item"><a href="http://web2py.com/book">{{=T('Documentation')}}</a></li>
-  </ul>
-</div>
-{{end}}
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-10 col-sm-9">
+          <div class="jumbotron">
+            <h1>Discovie</h1>
+            <p>Recommends movie suggestions or based off of your preferences! </p>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-lg-4">
+              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                   sizes="(max-width: 547px) 100vw, 547px">
+                <h2> Sing Street (2016) </h2>
+              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+            </div><!--/span-->
+            <div class="col-xs-6 col-lg-4">
+              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                   sizes="(max-width: 547px) 100vw, 547px">
+                <h2> Sing Street (2016) </h2>
+              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+            </div><!--/span-->
+            <div class="col-xs-6 col-lg-4">
+              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                   sizes="(max-width: 547px) 100vw, 547px">
+                <h2> Sing Street (2016) </h2>
+              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+            </div><!--/span-->
+            <div class="col-xs-6 col-lg-4">
+              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                   sizes="(max-width: 547px) 100vw, 547px">
+                <h2> Sing Street (2016) </h2>
+              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+            </div><!--/span-->
+            <div class="col-xs-6 col-lg-4">
+              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                   sizes="(max-width: 547px) 100vw, 547px">
+                <h2> Sing Street (2016) </h2>
+              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+            </div><!--/span-->
+            <div class="col-xs-6 col-lg-4">
+              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                   sizes="(max-width: 547px) 100vw, 547px">
+                <h2> Sing Street (2016) </h2>
+              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+
+          <!-- SIDE BAR -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                                                        <!-- SEARCH BOX CODE BEGINS -->
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="Type a movie, actor, or genre you like" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                  <div class="form-group">
+                                    <label for="filter">Filter by</label>
+                                    <select class="form-control">
+                                        <option value="0" selected>All Movies</option>
+                                        <option value="1">Featured</option>
+                                        <option value="2">Most popular</option>
+                                        <option value="3">Top rated</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Actor</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Keywords</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+                <!-- Search box code ends! -->
+          <div class="list-group">
+              <h5> Today's Recommended Movies</h5>
+            <a href="http://agoodmovietowatch.com/13th-2016/" class="list-group-item">
+                <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/13thmovie.jpg"> 13th (2016)</a>
+            <a href="http://agoodmovietowatch.com/pariah-2011/" class="list-group-item">
+                <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Pariah.jpg"> Pariah (2011)</a>
+            <a href="http://agoodmovietowatch.com/ip-man-2010/" class="list-group-item">
+                <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/ipman.jpg"> Ip Man (2008)</a>
+            <a href="http://agoodmovietowatch.com/human-capital-2013/" class="list-group-item">
+                <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Human_Capital_2_600.jpg"> Human Capital (2013)</a>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; CMPS 183: Discovie</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="offcanvas.js"></script>
+  </body>
+</html>
