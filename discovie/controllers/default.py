@@ -8,6 +8,15 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 
+def get_user_name_from_email(email):
+    """Returns a string corresponding to the user first and last names,
+    given the user email."""
+    u = db(db.auth_user.email == email).select().first()
+    if u is None:
+        return 'None'
+    else:
+        return ' '.join([u.first_name, u.last_name])
+
 
 def index():
     """
@@ -17,9 +26,13 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    if auth.user_id is not None:()
+    return dict()
 
+def userprefs():
+    """Suggests movie, add like movie to database, dislike movie to database:
+    """
+    return dict()
 
 def user():
     """
@@ -37,6 +50,8 @@ def user():
     to decorate functions that need access control
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
+    #Redirects user to users preference page
+    auth.settings.login_next = URL('default','userprefs')
     return dict(form=auth())
 
 

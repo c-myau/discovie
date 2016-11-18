@@ -1,0 +1,108 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var get_posts_url = "{{=URL('api', 'get_posts')}}";
+    var add_post_url = "{{=URL('api', 'add_post', user_signature=True)}}";
+    var del_post_url = "{{=URL('api', 'del_post', user_signature=True)}}";
+    var edit_post_url = "{{=URL('api', 'edit_post', user_signature=True)}}";
+</script>
+{{end}}
+
+<div class="main_content">
+    <div class="user-preference-header">
+        <!--To get back home -->
+        <a href="{{=URL('index')}}">
+            <img src="../static/images/dislogo.png" alt="Discovie Logo">
+        </a>
+                   <!-- Login -->
+        <div class="login">
+            {{if auth.user_id:}}
+            <div class="login_button text-right">
+                <a href="{{=URL('default', 'user', args=['logout'])}}" class="btn btn-danger">
+                    <i class="fa fa-times" aria-hidden="true"></i> Logout</a>
+             </div>
+                {{else:}}
+            <div class="login_button text-right">
+                <a href="{{=URL('default', 'user', args=['login'])}}" class="btn btn-warning">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+             </div>
+            {{pass}}
+        </div>
+            <h1 class="main_title text-center">User Preferences</h1>
+
+            <p class="explanation text-center">This page will help you create a movie preference!</p>
+    </div>
+
+    <div id="vue-div"  class="display:none">
+        <div v-if="logged_in">
+            <button v-if="!is_adding_post" class="btn btn-danger" v-on:click="add_post_button()">
+                <i class="fa fa-plus"></i>&nbsp;&nbsp;Add new post
+            </button>
+            <button v-if="is_adding_post" class="btn btn-warning btn-sm" v-on:click="cancel_post_button()">
+                <i class="fa fa-times-circle-o"></i>&nbsp;&nbsp;Cancel
+            </button>
+        </div>
+        <div v-if="is_adding_post" id="add-new-post">
+            <form action="#" v-on:submit.prevent="add_post" enctype="multipart/form-data" method="post">
+                <div id="postText">
+                    <textarea v-model="form_post_content" placeholder="Type in your post here." type="text" />
+                    </textarea>
+                </div>
+                <div>
+                    <input class="btn btn-primary fa" id="add_post_submit" type="submit" value="&#xf0c7;  Post" />
+                </div>
+            </form>
+        </div>
+        <!-- Posts List -->
+        <template v-for="post in posts" class="post_list post_listing">
+            <!--<div v-if="!edit_status[post.id]">-->
+            <div>
+                <p id="post" class="post-content">
+                    ${post.post_content}
+                </p>
+                <textarea class="form-control" id="textarea"  v-model="post.post_content" style="display: none;">${post.post_content}</textarea>
+            </div>
+            <div id="delEdit" v-if="post.user_email == user_email">
+                <button class="btn btn-info" id="editBtn" onclick="hideEditBtn(this)">
+                    <i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit
+                </button>
+
+                <button class="btn btn-info" id="saveBtn" onclick="hidePostBtn(this);" v-on:click="save_post(post.post_content, post.id, post)" style="display: none">
+                    <i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;Post
+                </button>
+                <button class="btn btn-danger" id="cancelBtn" onclick="hideCancelBtn(this);" v-on:click="cancel_post(post, post.temp)" style="display: none">
+                    <i class="fa fa-times-circle-o"></i>&nbsp;&nbsp;Cancel
+                </button>
+            </div>
+            <div id="delEdit" v-if="post.user_email == user_email">
+                <button class="btn btn-danger" v-on:click="delete_post(post.id)">
+                    <i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete
+                </button>
+            </div>
+            <div id="postInfo">
+                <h5>
+                    <b>Name:</b> ${post.user_name}
+                    <b>Created On:</b> ${post.created_on}
+                </h5>
+            </div>
+            <div id="postInfo">
+                <h5 v-if="post.created_on != post.updated_on">
+                    <b>Updated On:</b> ${post.updated_on}
+                </h5>
+            </div>
+        </template>
+        <br /> <br/>
+        <div id="load-more" v-if="has_more">
+            <button class="btn btn-default" v-on:click="get_more()">
+                Load More
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+<br />
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>

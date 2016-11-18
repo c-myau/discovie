@@ -1,4 +1,5 @@
 {{extend 'layout.html'}}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,14 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <meta name="description" content="Movie Suggestion">
+    <meta name="keywords" content="movies suggestion finder">
 
     <title>Discovie</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="offcanvas.css" rel="stylesheet">
@@ -26,7 +23,9 @@
 
         <div class="col-xs-10 col-sm-9">
           <div class="jumbotron">
-              <image src="../static/images/dislogo.png" alt="Discovie Logo" style="width:725px;height:250px;">
+              <a href="{{=URL('index')}}">
+                  <img src="../static/images/dislogo.png" alt="Discovie Logo" style="width:725px;height:250px;">
+                  </a>
           </div>
           <div class="row">
             <div class="col-xs-6 col-lg-4">
@@ -82,7 +81,20 @@
 
           <!-- SIDE BAR -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-                                                        <!-- SEARCH BOX CODE BEGINS -->
+            <!-- Login -->
+            <div class="login" text-right>
+                <a href="{{=URL('default', 'userprefs')}}" class="btn btn-success">
+                    <i class="fa fa-map-pin" aria-hidden="true"></i> Preferences</a>
+            {{if auth.user_id:}}
+                <a href="{{=URL('default', 'user', args=['logout'])}}" class="btn btn-danger">
+                    <i class="fa fa-times" aria-hidden="true"></i> Logout</a>
+                {{else:}}
+                <a href="{{=URL('default', 'user', args=['login'])}}" class="btn btn-warning">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+            {{pass}}
+            </div>
+            </br> <!--padding-->
+            <!-- SEARCH BOX CODE BEGINS -->
             <div class="input-group" id="adv-search">
                 <input type="text" class="form-control" placeholder="Type a movie, actor, or genre you like" />
                 <div class="input-group-btn">
