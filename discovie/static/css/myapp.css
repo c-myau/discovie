@@ -34,12 +34,17 @@
 #load-more {
   padding-bottom: 20px;
 }
-.user-preference-header img {
+
+.user-preference-top img {
   float: left;
   width: 200px;
   height: 50px;
+  border-style: solid;
 }
 
+.user-pref-login{
+    float: right;
+}
 .dropdown.dropdown-lg .dropdown-menu {
     margin-top: -1px;
     padding: 6px 20px;
@@ -83,4 +88,8 @@
 
 .list-group {
   padding-top: 20px;
+}
+
+.col-xs-3 {
+    padding-bottom: 320px;
 }
