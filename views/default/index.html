@@ -1,4 +1,5 @@
 {{extend 'layout.html'}}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,14 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <meta name="description" content="Movie Suggestion">
+    <meta name="keywords" content="movies suggestion finder">
 
     <title>Discovie</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="offcanvas.css" rel="stylesheet">
@@ -26,100 +23,123 @@
 
         <div class="col-xs-10 col-sm-9">
           <div class="jumbotron">
-            <h1>Discovie</h1>
-            <p>Recommends movie suggestions or based off of your preferences! </p>
+              <a href="{{=URL('index')}}">
+                  <img src="../static/images/dislogo.png" alt="Discovie Logo" style="width:725px;height:250px;">
+                  </a>
           </div>
-          <div class="row">
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> Sing Street (2016) </h2>
-              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
-              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> Sing Street (2016) </h2>
-              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
-              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> Sing Street (2016) </h2>
-              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
-              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> Sing Street (2016) </h2>
-              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
-              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> Sing Street (2016) </h2>
-              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
-              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> Sing Street (2016) </h2>
-              <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
-              <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
-            </div><!--/span-->
-          </div><!--/row-->
-        </div><!--/span-->
+          <div class="container-list">
+              <div class="row">
+                <div class="col-xs-6 col-lg-4">
+                  <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                       srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                       sizes="(max-width: 547px) 100vw, 547px">
+                    <h2> Sing Street (2016) </h2>
+                  <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+                  <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+                </div><!--/span-->
+                <div class="col-xs-6 col-lg-4">
+                  <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                       srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                       sizes="(max-width: 547px) 100vw, 547px">
+                    <h2> Sing Street (2016) </h2>
+                  <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+                  <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+                </div><!--/span-->
+                <div class="col-xs-6 col-lg-4">
+                  <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                       srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                       sizes="(max-width: 547px) 100vw, 547px">
+                    <h2> Sing Street (2016) </h2>
+                  <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+                  <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+                </div><!--/span-->
+                <div class="col-xs-6 col-lg-4">
+                  <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                       srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                       sizes="(max-width: 547px) 100vw, 547px">
+                    <h2> Sing Street (2016) </h2>
+                  <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+                  <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+                </div><!--/span-->
+                <div class="col-xs-6 col-lg-4">
+                  <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                       srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                       sizes="(max-width: 547px) 100vw, 547px">
+                    <h2> Sing Street (2016) </h2>
+                  <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+                  <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+                </div><!--/span-->
+                <div class="col-xs-6 col-lg-4">
+                  <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
+                       srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
+                       sizes="(max-width: 547px) 100vw, 547px">
+                    <h2> Sing Street (2016) </h2>
+                  <p>In 1980s Dublin, a young Irish catholic-school boy, whose family is facing financial problems starts his own band</p>
+                  <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=jYk2Vx1z6lk" role="button">Watch trailer!&raquo;</a>
+                </div><!--/span-->
+            </div><!--/row-->
+          </div><!--/container-->
+        </div> <!--/span-->
 
           <!-- SIDE BAR -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-                                                        <!-- SEARCH BOX CODE BEGINS -->
-            <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="Type a movie, actor, or genre you like" />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                  <div class="form-group">
-                                    <label for="filter">Filter by</label>
-                                    <select class="form-control">
-                                        <option value="0" selected>All Movies</option>
-                                        <option value="1">Featured</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">Top rated</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Actor</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Keywords</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </div>
+            <!-- Login -->
+            <div class="login" text-right>
+                <div class="container-small"
+>                    <a href="{{=URL('default', 'userprefs')}}" class="btn btn-success">
+                    <i class="fa fa-map-pin" aria-hidden="true"></i> Preferences</a>
+                {{if auth.user_id:}}
+                    <a href="{{=URL('default', 'user', args=['logout'])}}" class="btn btn-danger">
+                        <i class="fa fa-times" aria-hidden="true"></i> Logout</a>
+                    {{else:}}
+                    <a href="{{=URL('default', 'user', args=['login'])}}" class="btn btn-warning">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                {{pass}}
                 </div>
             </div>
+            </br> <!--padding-->
+            <!-- SEARCH BOX CODE BEGINS -->
+
+                <div class="container-search">
+                    <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" placeholder="Type a movie, actor, or genre you like" />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                      <div class="form-group">
+                                        <label for="filter">Filter by</label>
+                                        <select class="form-control">
+                                            <option value="0" selected>All Movies</option>
+                                            <option value="1">Featured</option>
+                                            <option value="2">Most popular</option>
+                                            <option value="3">Top rated</option>
+                                        </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="contain">Actor</label>
+                                        <input class="form-control" type="text" />
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="contain">Keywords</label>
+                                        <input class="form-control" type="text" />
+                                      </div>
+                                      <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
                 <!-- Search box code ends! -->
-          <div class="list-group">
-              <h5> Today's Recommended Movies</h5>
+          <div class="container-sidebar">
+              <div class="list-group">
+              <div class="container-sidebar-text"><h5> Today's Recommended Movies</h5></div>
             <a href="http://agoodmovietowatch.com/13th-2016/" class="list-group-item">
                 <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/13thmovie.jpg"> 13th (2016)</a>
             <a href="http://agoodmovietowatch.com/pariah-2011/" class="list-group-item">
@@ -129,6 +149,7 @@
             <a href="http://agoodmovietowatch.com/human-capital-2013/" class="list-group-item">
                 <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Human_Capital_2_600.jpg"> Human Capital (2013)</a>
           </div>
+          </div>
         </div><!--/span-->
       </div><!--/row-->
 
@@ -136,6 +157,7 @@
 
       <footer>
         <p>&copy; CMPS 183: Discovie</p>
+          <p>All images, names, and trademarks are copyright and the property of their respective owners.</p>
       </footer>
 
     </div><!--/.container-->

@@ -53,3 +53,23 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2016-11-20T23:30:33.951000
+CREATE TABLE web2py_session_discovie(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    locked CHAR(1),
+    client_ip CHAR(64),
+    created_datetime TIMESTAMP,
+    modified_datetime TIMESTAMP,
+    unique_key CHAR(64),
+    session_data BLOB
+);
+success!
+timestamp: 2016-11-20T23:30:34.184000
+CREATE TABLE post(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_email CHAR(512),
+    post_content TEXT,
+    created_on TIMESTAMP,
+    updated_on TIMESTAMP
+);
+success!

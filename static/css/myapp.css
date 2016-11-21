@@ -1,3 +1,54 @@
+/* line 2, ../sass/_main.scss */
+.post_listing {
+  margin: 10px 0px 10px 0px;
+  padding: 0 0 0 0px;
+}
+
+/* line 7, ../sass/_main.scss */
+.post_list {
+  padding-top: 10px;
+}
+
+/* line 11, ../sass/_main.scss */
+.post-content {
+  border-color: #cccccc;
+  border-style: solid;
+  border-width: 1px;
+  background: #eeeeee;
+  margin: 20px 0px 20px 0px;
+  padding: 20px;
+  white-space: pre-line;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+}
+
+#delEdit {
+    display: inline-block;
+}
+
+#postInfo {
+  display: inline-block;
+}
+
+#load-more {
+  padding-bottom: 20px;
+}
+
+.user-preference-top img {
+  float: left;
+  width: 200px;
+  height: 50px;
+  border: 3px solid green;
+}
+
+.user-pref-login{
+    float: right;
+}
+
+.main_title{
+    border: 2px solid black;
+}
 
 .dropdown.dropdown-lg .dropdown-menu {
     margin-top: -1px;
@@ -7,8 +58,7 @@
     display: flex !important;
 }
 .btn-group .btn {
-    border-radius: 0;
-    margin-left: -1px;
+    float: right;
 }
 .btn-group .btn:last-child {
     border-top-right-radius: 4px;
@@ -40,6 +90,50 @@
     }
 }
 
-.list-group {
-  padding-top: 20px;
+.list-group {}
+
+.col-xs-3 {
+    padding-bottom: 320px;
+}
+
+
+.container-search {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 24px;
+}
+.container-sidebar-text {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.container-small {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    margin-bottom: 3px;
+    color: inherit;
+    background-color: #f8f5f0;
+    border-radius: 6px;
+}
+.container-sidebar{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 3px;
+    color: inherit;
+    background-color: #f8f5f0;
+    border-radius: 6px;
+}
+
+.container-list{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 3px;
+    color: inherit;
+    background-color: #f8f5f0;
+    border-radius: 6px;
 }
