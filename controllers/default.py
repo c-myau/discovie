@@ -73,4 +73,11 @@ def call():
     """
     return service()
 
+def directors():
+    return dict()
 
+def genres():
+    return dict()
+
+def movies():
+    return dict()
