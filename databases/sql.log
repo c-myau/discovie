@@ -89,3 +89,6 @@ CREATE TABLE movie_suggestions(
     user_id INTEGER
 );
 success!
+success!
+success!
+success!
