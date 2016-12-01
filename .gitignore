@@ -9,8 +9,6 @@
 /errors/
 /sessions/
 / private /
-/uploads/
-/databases/
 
 # Mac
 .DS_Store
