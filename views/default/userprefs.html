@@ -1,7 +1,5 @@
 {{extend 'layout.html'}}
 
-
-
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
@@ -10,6 +8,67 @@
     var del_post_url = "{{=URL('api', 'del_post', user_signature=True)}}";
     var edit_post_url = "{{=URL('api', 'edit_post', user_signature=True)}}";
 </script>
+<script>
+    // I am using the following link to create star voting, BUT web2py doesn't support php
+    // https://code.tutsplus.com/tutorials/building-a-5-star-rating-system-with-jquery-ajax-and-php--net-11541
+    $(document).ready(function() {
+
+        $('.ratings_stars').hover(
+            // Handles the mouseover
+            function() {
+                $(this).prevAll().andSelf().addClass('ratings_over');
+                $(this).nextAll().removeClass('ratings_vote');
+            },
+            // Handles the mouseout
+            function() {
+                $(this).prevAll().andSelf().removeClass('ratings_over');
+                // can't use 'this' because it wont contain the updated data
+                set_votes($(this).parent());
+            }
+        );
+
+
+        // This actually records the vote
+        $('.ratings_stars').bind('click', function() {
+            var star = this;
+            var widget = $(this).parent();
+
+            var clicked_data = {
+                clicked_on : $(star).attr('class'),
+                widget_id : $(star).parent().attr('id')
+            };
+            $.post(
+                'ratings.php',
+                clicked_data,
+                function(INFO) {
+                    widget.data( 'fsr', INFO );
+                    set_votes(widget);
+                },
+                'json'
+            );
+        });
+
+
+
+    });
+
+    function set_votes(widget) {
+
+        var avg = $(widget).data('fsr').whole_avg;
+        var votes = $(widget).data('fsr').number_votes;
+        var exact = $(widget).data('fsr').dec_avg;
+
+        window.console && console.log('and now in set_votes, it thinks the fsr is ' + $(widget).data('fsr').number_votes);
+
+        $(widget).find('.star_' + avg).prevAll().andSelf().addClass('ratings_vote');
+        $(widget).find('.star_' + avg).nextAll().removeClass('ratings_vote');
+        $(widget).find('.total_votes').text( votes + ' votes recorded (' + exact + ' rating)' );
+    }
+    // END FIRST THING
+
+    </script>
+
+
 {{end}}
 
 <div class="main_content">
@@ -105,7 +164,8 @@
     </div>
 </div>
 
-        <div class="container" id="catalog">
+
+ <div class="container" id="catalog">
 
 				<div id="movies_catalog">
 
@@ -114,130 +174,260 @@
 
 						<img src="//image.tmdb.org/t/p/w185/lFSSLTlFozwpaGlO31OoUeirBgQ.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Jason Bourne (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="movie-tt4196776" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2277860" id="movie-tt2277860" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/z09QAf8WbZncbitewNk6lKYMZsh.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Finding Dory (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="movie-tt2277860" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3691740" id="movie-tt3691740" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/xMvzfhXZdfeLBZZUIQRB4vw1EtA.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The BFG (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4651520" id="movie-tt4651520" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/3S7V2Jd2G61LltoCsYUj4GwON5p.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Bad Moms (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4160708" id="movie-tt4160708" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/lw0IqOSMsQcy1QnVIEIDppLmNwk.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Don't Breathe (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1700841" id="movie-tt1700841" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/jDeDRLEa8JqB3xmKVy6q3bkmDt6.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Sausage Party (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3522806" id="movie-tt3522806" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/tgfRDJs5PFW20Aoh1orEzuxW8cN.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Mechanic: Resurrection (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2660888" id="movie-tt2660888" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/mLrQMqyZgLeP8FrT5LCobKAiqmK.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Star Trek Beyond (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4786282" id="movie-tt4786282" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/sXqrTXcBf9TdIv5rfgeFNu9Iwu7.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Lights Out (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1289401" id="movie-tt1289401" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/4qnJ1hsMADxzwnOmnwjZTNp0rKT.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Ghostbusters (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1628841" id="movie-tt1628841" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/9KQX22BeFzuNM66pBA6JbiaJ7Mi.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Independence Day: Resurgence (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1355631" id="movie-tt1355631" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/tnQ2TLwz82F3KXUCSMePPXviY1i.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Infiltrator (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3498820" id="movie-tt3498820" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/5N20rQURev5CNDcMjHVUZhpoCNC.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Captain America: Civil War
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 								</div>
@@ -249,143 +439,280 @@
 
 						<img src="//image.tmdb.org/t/p/w185/6FxOPJ9Ysilpq0IgkrMJ7PubFhq.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Legend of Tarzan (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3385516" id="movie-tt3385516" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/zSouWWrySXshPCT4t3UKCQGayyo.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										X-Men: Apocalypse (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1489889" id="movie-tt1489889" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/9M5ibpQUjoVFjjnP2AdLcof4hAk.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Central Intelligence (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2823054" id="movie-tt2823054" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/u8ynhM5I8D7jG2dUE6KlsOgwYYp.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Mike and Dave Need Wedding Dates (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt0803096" id="movie-tt0803096" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/ckrTPz6FZ35L5ybjqvkLWzzSLO7.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Warcraft
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3416828" id="movie-tt3416828" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/dN3KkgXcDkP1QkOZPz5EGXzS8B7.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Ice Age: Collision Course (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4438848" id="movie-tt4438848" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/bWUeJHbKIyT306WtJFRHoSzX9nk.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Neighbors 2: Sorority Rising
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3065204" id="movie-tt3065204" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/pUwdglql8cbztEink0JCgG1TY28.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Conjuring 2
+										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
-								</div>
-
-
-
 
 				<div class="col-xs-3" data-movie_id="tt4196848" id="movie-tt4196848" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/d0l91CGcC5X2Zsa0hfEf2EW3cdh.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Mr. Church (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3040964" id="movie-tt3040964" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/vOipe2myi26UDwP978hsYOrnUWC.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Jungle Book
+										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
-								</div>
 
 				<div class="col-xs-3" data-movie_id="tt3949660" id="movie-tt3949660" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/5BCpxPLyp4wGcTribpZ6WtNkVJ5.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Teenage Mutant Ninja Turtles: Out of the Shadows
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4052882" id="movie-tt4052882" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/6vuxwCfBejPfUjMxrPgk0ANmVFq.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Shallows (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3110958" id="movie-tt3110958" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/hU0E130tsGdsYa4K9lc3Xrn5Wyt.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Now You See Me 2
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2674426" id="movie-tt2674426" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/oN5lELHH5Xheiy0YdhnY3JB4hx2.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Me Before You
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 
@@ -393,475 +720,943 @@
 
 						<img src="//image.tmdb.org/t/p/w185/pbJ1vNwK9X6ZQm2vxarxcLJ0aGn.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Nice Guys
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1124037" id="movie-tt1124037" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/eFyJMUA4JXEgFNa3JKww1SkHJRM.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Free State of Jones (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1985949" id="movie-tt1985949" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/t2mZzQXjpQxmqtJOPpe8Dr2YpMl.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Angry Birds Movie
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2241351" id="movie-tt2241351" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/4BKptydRqLY9dQoAghJJJmrJuwR.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Money Monster
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2567026" id="movie-tt2567026" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/7rfucKCjV01OEsGr9grXa34Aywd.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Alice Through the Looking Glass (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3531824" id="movie-tt3531824" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/uM1dNEmcAeyDGjMcFLlkKOyBgft.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Nerve (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3553976" id="movie-tt3553976" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/fnaGmGCWgGOQjCpM0TqKPZJ5x85.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Captain Fantastic (2016)
 										</div>
-								</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
+									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3499096" id="movie-tt3499096" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/szLfTQ2vLFQkNbP3dc0pnco1rje.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Race (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2709768" id="movie-tt2709768" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/WLQN5aiQG8wc9SeKwixW7pAR8K.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Secret Life of Pets
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4034354" id="movie-tt4034354" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/9BdJz7b4WdJul0KVu42YFEgqzyp.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Swiss Army Man (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2975590" id="movie-tt2975590" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/cGOPbv9wA5gEejkUN892JrveARt.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Batman v Superman: Dawn of Justice
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2381991" id="movie-tt2381991" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/b77l5vmp6PYsc98LE6Uf1mXtmHh.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Huntsman: Winter's War
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4139124" id="movie-tt4139124" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/udU6t5xPNDLlRTxhjXqgWFFYlvO.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Keanu (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3960412" id="movie-tt3960412" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/m9k2MCvZJWkV5DfJY9fueeeqNxb.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Popstar: Never Stop Never Stopping
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2702724" id="movie-tt2702724" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/w8smnnIVlEeFwD4Z0pKPC3RN2xT.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Boss
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt5595168" id="movie-tt5595168" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/zhPPQfkgdJS8t7LhbIQpwPZSN20.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Kingsglaive: Final Fantasy XV (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4853102" id="movie-tt4853102" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/zm0ODjtfJfJW0W269LqsQl5OhJ8.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Batman: The Killing Joke
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3647498" id="movie-tt3647498" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/rQ3CKv33u2Z4keC2AYZqi3RGIdX.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Blood Father
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3410834" id="movie-tt3410834" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/tSFBh9Ayn5uiwbUK9HvD2lrRgaQ.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										The Divergent Series: Allegiant (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1179933" id="movie-tt1179933" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/aeiVxTSTeGJ2ICf1iSDXkF3ivZp.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										10 Cloverfield Lane (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1524930" id="movie-tt1524930" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/q9kL9WW0Uu4AcfTi5iCLcYzBgnm.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Vacation (2015)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4824308" id="movie-tt4824308" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/6LzF5RneIAj5dkUVuJeXPDmnLRh.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										God's Not Dead 2 (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3628584" id="movie-tt3628584" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/aUPjbU8gnMtl84Qyybi873jawE5.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Barbershop: The Next Cut
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1860213" id="movie-tt1860213" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/cZEx6mB5Ftnt7LvlDjTKXcrTvyg.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Dirty Grandpa (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3072482" id="movie-tt3072482" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/qfWLO0iXmbvxzyk0ez4pXrgkRDM.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Hardcore Henry
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2980210" id="movie-tt2980210" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/nqkGGlE56yINQnb0jCYmbymsYH7.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										A Hologram for the King (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4257926" id="movie-tt4257926" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/3sPIq0Uqe8SN5T0Pq7vUOFLb2Bk.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Miracles from Heaven (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2869728" id="movie-tt2869728" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/A739odgY2FjoLvYLYdypUc6GpaY.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Ride Along 2
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt0825283" id="movie-tt0825283" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/8j9MhnsdM8MB9wXjDWYRCIyR8i7.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Maximum Ride (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3082898" id="movie-tt3082898" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/fHwikdzHy8btv7Rn1eRGe9rvLVO.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Kickboxer: Vengeance (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3014866" id="movie-tt3014866" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/6K5JOW6HmrwJnP0VILq667cspnS.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Criminal
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2948356" id="movie-tt2948356" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Zootopia
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2404233" id="movie-tt2404233" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/uPqAW07bGoljf3cmT5gecdOvVol.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Gods of Egypt
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3760922" id="movie-tt3760922" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/gN7Su6RP9zDXJigHGyGLnRaWqsb.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										My Big Fat Greek Wedding 2 (2016)
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3300542" id="movie-tt3300542" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/9j2AmDhZvdwMyYKpqe4CtBkN1Tw.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										London Has Fallen
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1670345" id="movie-tt1670345" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/A06e9YJ5ry3WXEIFIAD1mKBxcuZ.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Now You See Me
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2057392" id="movie-tt2057392" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/7IUUuB9Nwtp2Lslpt4Jo4bzMGoX.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Eye in the Sky
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1712261" id="movie-tt1712261" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/i7hpdsd77vdTk11RalLrQ2PXzX5.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Triple 9
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt0266543" id="movie-tt0266543" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/zjqInUwldOBa0q07fOyohYCWxWX.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Finding Nemo
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4781612" id="movie-tt4781612" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/aRRLpsusORQxOpFkZvXdk00TkoY.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Imperium
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2510894" id="movie-tt2510894" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/t4PLWexbe4wbNydCOBv18cYexup.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Hotel Transylvania 2
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt0116629" id="movie-tt0116629" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/bqLlWZJdhrS0knfEJRkquW7L8z2.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Independence Day
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt2649554" id="movie-tt2649554" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/sp55ilnrp50TC0Qf7F2AC2OqxpB.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Midnight Special
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt4172430" id="movie-tt4172430" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/m4ZfuML89Rq8gbRGdm9ncSibjlx.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										13 Hours: The Secret Soldiers of Benghazi
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1292566" id="movie-tt1292566" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/jAhFr4OKTq8c5YYi8Xe5raYMU8O.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										How to Be Single
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt3553442" id="movie-tt3553442" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/96vLovyljHFXIZIF0Ffar5qcldV.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Whiskey Tango Foxtrot
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 				<div class="col-xs-3" data-movie_id="tt1431045" id="movie-tt1431045" style=" width: 185px; height: 278px;">
 
 						<img src="//image.tmdb.org/t/p/w185/inVq3FRqcYIRl2la8iZikYYxFNR.jpg">
 									<div class="title">
-										<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
-										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i>
+									<!--	<i class="fa fa-thumbs-up" style="color:green" aria-hidden="true"></i>
+										<i class="fa fa-thumbs-down" style="color:red" aria-hidden="true"></i> -->
 										Deadpool
 										</div>
+                    <div class='movie_choice'>
+                        <div id="r1" class="rate_widget">
+                            <div class="star_1 ratings_stars"></div>
+                            <div class="star_2 ratings_stars"></div>
+                            <div class="star_3 ratings_stars"></div>
+                            <div class="star_4 ratings_stars"></div>
+                            <div class="star_5 ratings_stars"></div>
+                            <div class="total_votes">vote data</div>
+                        </div>
+                    </div>
 									</div>
 
 		</div>
-</div>
-
 
 <br />
 
