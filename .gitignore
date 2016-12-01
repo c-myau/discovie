@@ -5,13 +5,12 @@
 .idea/
 
 # Web2py 
- cache/* 
-errors /*
-sessions/*
- private /*
-uploads/*
-databases/*
-!databases/storage.sqlite
+/ cache/*
+/errors/
+/sessions/
+/ private /
+/uploads/
+/databases/
 
 # Mac
 .DS_Store
