@@ -26,13 +26,15 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    if auth.user_id is not None:()
+    if auth.user_id is not None: ()
     return dict()
+
 
 def userprefs():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
     return dict()
+
 
 def user():
     """
@@ -50,8 +52,8 @@ def user():
     to decorate functions that need access control
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
-    #Redirects user to users preference page
-    auth.settings.login_next = URL('default','userprefs')
+    # Redirects user to users preference page
+    auth.settings.login_next = URL('default', 'userprefs')
     return dict(form=auth())
 
 
@@ -73,11 +75,15 @@ def call():
     """
     return service()
 
+
 def directors():
     return dict()
+
 
 def genres():
     return dict()
 
+
 def movies():
-    return dict()
+    rows = db().select(db.movies.ALL)
+    return dict(rows=rows)
