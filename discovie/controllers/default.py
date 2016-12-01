@@ -54,7 +54,6 @@ def user():
     auth.settings.login_next = URL('default','userprefs')
     return dict(form=auth())
 
-
 @cache.action()
 def download():
     """
