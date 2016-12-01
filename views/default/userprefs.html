@@ -1,7 +1,5 @@
 {{extend 'layout.html'}}
 
-
-
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
@@ -11,8 +9,8 @@
     var edit_post_url = "{{=URL('api', 'edit_post', user_signature=True)}}";
 </script>
 <script>
-
-    // This is the first thing we add ------------------------------------------
+    // I am using the following link to create star voting, BUT web2py doesn't support php
+    // https://code.tutsplus.com/tutorials/building-a-5-star-rating-system-with-jquery-ajax-and-php--net-11541
     $(document).ready(function() {
 
         $('.ratings_stars').hover(
@@ -68,14 +66,9 @@
     }
     // END FIRST THING
 
-
-
-
-
-
-
-
     </script>
+
+
 {{end}}
 
 <div class="main_content">
