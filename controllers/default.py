@@ -8,6 +8,8 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 
+import random
+
 def get_user_name_from_email(email):
     """Returns a string corresponding to the user first and last names,
     given the user email."""
@@ -27,7 +29,16 @@ def index():
     return auth.wiki()
     """
     if auth.user_id is not None: ()
-    return dict()
+    trl_list = []
+    i = 0
+    for row in db().select(db.yt_trailers.ALL):
+        trl_list.append(row)
+        i += 1
+    print i
+    print trl_list
+    randt = trl_list[random.randint(0,i-1)]
+    print randt
+    return dict(trl=trl_list, rant=randt)
 
 
 def userprefs():
@@ -86,3 +97,9 @@ def genres():
 def movies():
     rows = db().select(db.movies.ALL)
     return dict(rows=rows)
+
+def createyt():
+    form = SQLFORM(db.yt_trailers)
+    if form.process().accepted:
+        response.flash="Youtube trailer created"
+    return dict(form=form)

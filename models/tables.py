@@ -26,6 +26,9 @@ db.define_table('movie_suggestions',
                 Field('movie_id', 'integer', required=True),
                 Field('user_id', 'integer', required=True))
 
+db.define_table('yt_trailers',
+                Field('name', 'string', required=True),
+                Field('youtube_id', 'string', required=True))
 
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
