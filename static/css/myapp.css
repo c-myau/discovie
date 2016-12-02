@@ -58,12 +58,9 @@
     display: flex !important;
 }
 .btn-group .btn {
-<<<<<<< HEAD
     border-radius: 0;
     margin-left: -1px;
-=======
     float: right;
->>>>>>> origin/Chris
 }
 .btn-group .btn:last-child {
     border-top-right-radius: 4px;
@@ -95,7 +92,6 @@
     }
 }
 
-<<<<<<< HEAD
 .list-group {
   padding-top: 20px;
 }
@@ -140,7 +136,7 @@
     font: 10px verdana, sans-serif;
     margin: 0 auto 40px auto;
     width: 180px;
-=======
+}
 .list-group {}
 
 .col-xs-3 {
@@ -187,5 +183,4 @@
     color: inherit;
     background-color: #f8f5f0;
     border-radius: 6px;
->>>>>>> origin/Chris
 }
