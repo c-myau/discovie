@@ -68,6 +68,26 @@
 
     </script>
 
+<script>
+    function func()
+    {
+
+    }
+function myFunction() {
+    var x = document.getElementsByName("rating-input-1");
+
+    for(var j=0;j<x.length;j++)
+            if(x[j].checked){
+              // alert(x[j].value);
+             //   alert(y);
+                document.getElementById("hiddn").value = x[j].value;
+              // alert(document.getElementById("hiddn").value);
+//                 return x[j].value;
+            }
+}
+
+
+</script>
 
 {{end}}
 

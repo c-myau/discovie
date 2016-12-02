@@ -25,13 +25,14 @@
           <div class="jumbotron">
               <div class="imghome">
                   <a href="{{=URL('index')}}">
-                        <img src="../static/images/dislogo.png" alt="Discovie Logo" style="width:725px;height:250px;">
+                        <img src="../static/images/dislogo.png" alt="Discovie Logo" style="max-width: 100%">
                   </a>
               </div>
           </div>
            <div class="container-list">
             <div id="youtube-trailer" align="middle">
                 <!-- TO ADD A MOVIE go to URL/discovie/createyt -->
+                <h2><u>Now Playing in Theaters Trailers</u></h2>
                 <iframe id="ytplayer" type="text/html" width=100% height="240"
                         src="https://www.youtube.com/embed/{{=rant.youtube_id}}?autoplay=1&"
                         frameborder="0">
