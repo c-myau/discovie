@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.187475
 CREATE TABLE web2py_session_discovie(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -10,6 +11,9 @@ CREATE TABLE web2py_session_discovie(
 );
 success!
 timestamp: 2016-12-01T14:01:12.242304
+=======
+timestamp: 2016-11-17T00:29:40.482000
+>>>>>>> origin/Chris
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
@@ -21,21 +25,33 @@ CREATE TABLE auth_user(
     registration_id CHAR(512)
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.248476
+=======
+timestamp: 2016-11-17T00:29:40.557000
+>>>>>>> origin/Chris
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.254860
+=======
+timestamp: 2016-11-17T00:29:40.610000
+>>>>>>> origin/Chris
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.260076
+=======
+timestamp: 2016-11-17T00:29:40.629000
+>>>>>>> origin/Chris
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
@@ -44,7 +60,11 @@ CREATE TABLE auth_permission(
     record_id INTEGER
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.264726
+=======
+timestamp: 2016-11-17T00:29:40.661000
+>>>>>>> origin/Chris
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
@@ -54,7 +74,11 @@ CREATE TABLE auth_event(
     description TEXT
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.269859
+=======
+timestamp: 2016-11-17T00:29:40.740000
+>>>>>>> origin/Chris
 CREATE TABLE auth_cas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
@@ -64,6 +88,7 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-12-01T14:01:12.281869
 CREATE TABLE movies(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -704,6 +729,40 @@ success!
 success!
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+=======
+timestamp: 2016-11-20T23:30:33.951000
+CREATE TABLE web2py_session_discovie(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    locked CHAR(1),
+    client_ip CHAR(64),
+    created_datetime TIMESTAMP,
+    modified_datetime TIMESTAMP,
+    unique_key CHAR(64),
+    session_data BLOB
+);
+success!
+timestamp: 2016-11-20T23:30:34.184000
+CREATE TABLE post(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_email CHAR(512),
+    post_content TEXT,
+    created_on TIMESTAMP,
+    updated_on TIMESTAMP
+);
+success!
+>>>>>>> origin/Chris
 success!
 success!
 success!

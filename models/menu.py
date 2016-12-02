@@ -5,7 +5,7 @@
 # Customize your APP title, subtitle and menus here
 # ----------------------------------------------------------------------------------------------------------------------
 
-response.logo = A(B('web', SPAN(2), 'py'), XML('&trade;&nbsp;'),
+response.logo = A(B('DISC', SPAN('ovie')), XML('&trade;&nbsp;'),
                   _class="navbar-brand", _href="http://www.web2py.com/",
                   _id="web2py-logo")
 response.title = request.application.replace('_', ' ').title()
@@ -49,11 +49,37 @@ def _():
     # useful links to internal and external resources
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
-        (T('My Sites'), False, URL('admin', 'default', 'site')),
-        (T('Movies'), False, URL('discovie', 'default', 'movies', args=[''])),
-        (T('Directors'), False, URL('discovie', 'default', 'index', args=[''])),
-        (T('Genres'), False, URL('discovie', 'default', 'index', args=[''])),
-        (T('Top 10'), False, URL('discovie', 'default', 'index', args=[''])),
+        (T('Contact Us'), False, URL('admin', 'default', 'site')),
+        (T('This App'), False, '#', [
+            (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
+            LI(_class="divider"),
+            (T('Controller'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/controllers/%s.py' % (app, ctr))),
+            (T('View'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/views/%s' % (app, response.view))),
+            (T('DB Model'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/models/db.py' % app)),
+            (T('Menu Model'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/models/menu.py' % app)),
+            (T('Config.ini'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/private/appconfig.ini' % app)),
+            (T('Layout'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/views/layout.html' % app)),
+            (T('Stylesheet'), False,
+             URL(
+                 'admin', 'default', 'edit/%s/static/css/web2py-bootstrap3.css' % app)),
+            (T('Database'), False, URL(app, 'appadmin', 'index')),
+            (T('Errors'), False, URL(
+                'admin', 'default', 'errors/' + app)),
+            (T('About'), False, URL(
+                'admin', 'default', 'about/' + app)),
+        ]),
     ]
 
 

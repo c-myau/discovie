@@ -25,7 +25,7 @@ div.w2p_flash.alert:hover {
     filter: alpha(opacity=25);
 }
 .main-container {
-    margin-top: 20px;
+    background: url(../images/curtains2.jpg);
 }
 
 div.error {
@@ -86,18 +86,20 @@ select.autocomplete {
     padding: 6px 12px;
 }
 #web2py-logo {
-    color: #c6cecc;
+    color: #3e3f3a;
 }
 #web2py-logo b {
     display: inline-block;
+    font-size: 33px;
     margin-top: -1px;
 }
 #web2py-logo b>span {
-    font-size: 22px;
+    font-size: 40px;
     color: #FFF;
 }
+
 #web2py-logo:hover {
-    color: #FFF;
+    color: #fff;
 }
 .footer > .container-fluid {
     padding-left: 15px;
@@ -135,7 +137,9 @@ header h1 {
 }
 header .jumbotron {
     background-color: transparent;
+
 }
+
 .w2p_flash {
     opacity: 0.9!important;
     right: 100px;

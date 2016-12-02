@@ -10,6 +10,7 @@
 
 import random
 
+
 def get_user_name_from_email(email):
     """Returns a string corresponding to the user first and last names,
     given the user email."""
@@ -44,8 +45,13 @@ def index():
 def userprefs():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
+    if auth.user_id is not None:()
     return dict()
 
+def userprefs():
+    """Suggests movie, add like movie to database, dislike movie to database:
+    """
+    return dict()
 
 def user():
     """
@@ -65,6 +71,8 @@ def user():
     """
     # Redirects user to users preference page
     auth.settings.login_next = URL('default', 'userprefs')
+    #Redirects user to users preference page
+    auth.settings.login_next = URL('default','userprefs')
     return dict(form=auth())
 
 @cache.action()
@@ -84,7 +92,6 @@ def call():
     supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
     """
     return service()
-
 
 def directors():
     return dict()
