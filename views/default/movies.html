@@ -6,8 +6,17 @@
 </head>
 <body>
 {{for item in rows:}}
-    <h1>
     {{=item.movie_title}}
+       </div><!--/CL-->
+         <div class="container-list">
+          <div class="row">
+            <div class="col-xs-6 col-lg-4">
+                <h2> {{=item.movie_title}} </h2>
+              <p>By {{=item.director_name}}</p>
+            </div><!--/span-->
+          </div><!--/row-->
+          </div><!--/span-->
+         </div><!--/span-->
     {{pass}}
 </body>
 </html>
