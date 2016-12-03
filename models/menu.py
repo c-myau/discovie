@@ -95,11 +95,8 @@ def _():
             (T('Short'), False, URL('discovie', 'default', 'genres', args=['Short'])),
             (T('Film-Noir'), False, URL('discovie', 'default', 'genres', args=['Film-Noir'])),
         ]),
-        (T('Action'), False, URL('default', 'movies')),
-        (T('Animation'), False, URL('default', 'movies')),
-        (T('Comedies'), False, URL('default', 'movies')),
-        (T('Horror'), False, URL('default', 'movies')),
-        (T('Contact Us'), False, URL('admin', 'default', 'site')),
+        (T('Popular Movies'), False, URL('discovie', 'default', 'popular')),
+        (T('Top Movies'), False, URL('discovie', 'default', 'top')),
     ]
 
 

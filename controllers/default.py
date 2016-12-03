@@ -115,6 +115,15 @@ def genres():
     return dict(rows=rows)
 
 
+def popular():
+    rows = db(db.test_db.movie_facebook_likes).select(orderby=~db.test_db.movie_facebook_likes)
+    return dict(rows=rows)
+
+def top():
+    rows = db(db.test_db.imdb_score).select(orderby=~db.test_db.imdb_score)
+    return dict(rows=rows)
+
+
 def movies():
     rows = db().select(db.test_db.ALL, limitby=(0, 100))
     return dict(rows=rows)

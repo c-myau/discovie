@@ -8,11 +8,11 @@
 {{for item in rows:}}
 <div class="container-list">
     <div class="row">
-        <div class="col-xs-6 col-lg-4">
+        <div>
             <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
-            <img src={{=item.poster_url}} style="max-width:25%;height:auto;">
-            <p>{{=item.synopsis}}</p>
             <p>Directed By {{=item.director_name}}</p>
+            <img style="max-width:15%;height:auto;" src={{=item.poster_url}}>
+            <p>{{=item.synopsis}}</p>
         </div><!--/span-->
     </div><!--/row-->
 </div><!--/span-->
