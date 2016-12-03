@@ -12,7 +12,7 @@
 /errors/
 /sessions/
 / private /
+/databases/
 
 # Mac
 .DS_Store
-/databases/sql.log
