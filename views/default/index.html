@@ -33,7 +33,7 @@
                 <div id="youtube-trailer" align="middle">
                     <!-- TO ADD A MOVIE go to URL/discovie/createyt -->
                     <h4><u>Now Playing in Theaters Trailers:</u> {{=rant.name}}</h4>
-                    <iframe id="ytplayer" type="text/html" width=100% height="240"
+                    <iframe id="ytplayer" type="text/html" width=100% height="480"
                             src="https://www.youtube.com/embed/{{=rant.youtube_id}}?autoplay=1&"
                             frameborder="0">
                     </iframe>
@@ -43,9 +43,7 @@
                 <div class="row">
                 {{for item in ranm:}}
                     <div class="col-xs-6 col-lg-4">
-                        <img src={{=item.poster_url}} alt="singstreet" style="max-width:100%;height:auto;"
-                             srcset={{=item.poster_url}} 300w, {{=item.poster_url}} 547w"
-                        sizes="(max-width: 547px) 100vw, 547px">
+                        <img src={{=item.poster_url}} style="max-width:100%;height:auto;">
                         <h2> {{=item.movie_title}} ({{=item.title_year}}) </h2>
                         <div class="sidebar-box">
                             <p>{{=item.synopsis}} </p>
