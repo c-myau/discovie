@@ -110,7 +110,7 @@ def genres():
 
 
 def movies():
-    rows = db().select(db.test_db.ALL, limitby=(0, 100))
+    rows = db().select(db.movie_metadata.ALL)
     return dict(rows=rows)
 
 def createyt():
