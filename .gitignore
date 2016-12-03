@@ -4,6 +4,9 @@
 # PyCharm
 .idea/
 
+# Logs
+*.log
+
 # Web2py 
 / cache/*
 /errors/
@@ -12,3 +15,4 @@
 
 # Mac
 .DS_Store
+/databases/sql.log
