@@ -29,7 +29,7 @@ if not request.env.web2py_runtime_gae:
     #          check_reserved=['all'])
 
     # pythonanywhere production database
-    db = DAL('mysql://acchiao:asdf1234@address:acchiao.mysql.pythonanywhere-services.com/acchiao$sandbox_db',
+    db = DAL('mysql://acchiao:asdf1234@acchiao.mysql.pythonanywhere-services.com/acchiao$sandbox_db',
              pool_size=1,
              check_reserved=['all'])
 
