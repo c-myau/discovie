@@ -45,28 +45,15 @@ def _():
     # ------------------------------------------------------------------------------------------------------------------
     app = request.application
     ctr = request.controller
-    genres = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
-              'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
-              'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
+    # genres = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
+    #           'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
+    #           'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
     # ------------------------------------------------------------------------------------------------------------------
     # useful links to internal and external resources
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
-        (T('This App'), False, '#', [
-            (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
-            LI(_class="divider"),
-            (T('Controller'), False, URL('admin', 'default', 'edit/%s/controllers/%s.py' % (app, ctr))),
-            (T('View'), False, URL('admin', 'default', 'edit/%s/views/%s' % (app, response.view))),
-            (T('DB Model'), False, URL('admin', 'default', 'edit/%s/models/db.py' % app)),
-            (T('Menu Model'), False, URL('admin', 'default', 'edit/%s/models/menu.py' % app)),
-            (T('Config.ini'), False, URL('admin', 'default', 'edit/%s/private/appconfig.ini' % app)),
-            (T('Layout'), False, URL('admin', 'default', 'edit/%s/views/layout.html' % app)),
-            (T('Stylesheet'), False, URL('admin', 'default', 'edit/%s/static/css/web2py-bootstrap3.css' % app)),
-            (T('Database'), False, URL(app, 'appadmin', 'index')),
-            (T('Errors'), False, URL('admin', 'default', 'errors/' + app)),
-            (T('About'), False, URL('admin', 'default', 'about/' + app)),
-        ]),
-
+        (T('Popular'), False, URL('discovie', 'default', 'popular')),
+        (T('Top'), False, URL('discovie', 'default', 'top')),
         (T('Genres'), False, '#', [
             (T('Action'), False, URL('discovie', 'default', 'genres', args=['Action'])),
             (T('Adventure'), False, URL('discovie', 'default', 'genres', args=['Adventure'])),
@@ -95,8 +82,20 @@ def _():
             (T('Short'), False, URL('discovie', 'default', 'genres', args=['Short'])),
             (T('Film-Noir'), False, URL('discovie', 'default', 'genres', args=['Film-Noir'])),
         ]),
-        (T('Popular Movies'), False, URL('discovie', 'default', 'popular')),
-        (T('Top Movies'), False, URL('discovie', 'default', 'top')),
+        (T('This App'), False, '#', [
+            (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
+            LI(_class="divider"),
+            (T('Controller'), False, URL('admin', 'default', 'edit/%s/controllers/%s.py' % (app, ctr))),
+            (T('View'), False, URL('admin', 'default', 'edit/%s/views/%s' % (app, response.view))),
+            (T('DB Model'), False, URL('admin', 'default', 'edit/%s/models/db.py' % app)),
+            (T('Menu Model'), False, URL('admin', 'default', 'edit/%s/models/menu.py' % app)),
+            (T('Config.ini'), False, URL('admin', 'default', 'edit/%s/private/appconfig.ini' % app)),
+            (T('Layout'), False, URL('admin', 'default', 'edit/%s/views/layout.html' % app)),
+            (T('Stylesheet'), False, URL('admin', 'default', 'edit/%s/static/css/web2py-bootstrap3.css' % app)),
+            (T('Database'), False, URL(app, 'appadmin', 'index')),
+            (T('Errors'), False, URL('admin', 'default', 'errors/' + app)),
+            (T('About'), False, URL('admin', 'default', 'about/' + app)),
+        ]),
     ]
 
 
