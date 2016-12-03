@@ -44,13 +44,13 @@
                 {{for item in ranm:}}
                     <div class="col-xs-6 col-lg-4">
                         <img src={{=item.poster_url}} style="max-width:100%;height:auto;">
-                        <h2> {{=item.movie_title}} ({{=item.title_year}}) </h2>
-                        <div class="sidebar-box">
+                        <h2 class="fix"> {{=item.movie_title}} ({{=item.title_year}}) </h2>
+                        <div class="synopsis">
                             <p>{{=item.synopsis}} </p>
                             <p class="read-more"><a href="#" class="button">Read More</a></p>
                         </div>
-                        <p>Genres: {{=item.genres}}</p>
-                        <a class="btn btn-secondary" href={{=item.movie_imdb_link}} role="button">Check out the movie on
+                        <a class="btn btn-secondary" href={{=item.movie_imdb_link}} role="button">Check out the
+                            movie on
                             IMDb!&raquo;</a>
                     </div><!--/span-->
                 {{pass}}
