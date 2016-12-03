@@ -448,3 +448,211 @@ success!
 success!
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2016-12-02T21:04:11.111332
+CREATE TABLE test_db(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_id INTEGER,
+    color CHAR(512),
+    director_name CHAR(512),
+    num_critic_for_reviews INTEGER,
+    duration INTEGER,
+    director_facebook_likes INTEGER,
+    actor_3_facebook_likes INTEGER,
+    actor_2_name CHAR(512),
+    actor_1_facebook_likes INTEGER,
+    gross INTEGER,
+    genres CHAR(512),
+    actor_1_name CHAR(512),
+    movie_title CHAR(512),
+    num_voted_users INTEGER,
+    cast_total_facebook_likes INTEGER,
+    actor_3_name CHAR(512),
+    facenumber_in_poster INTEGER,
+    plot_keywords CHAR(512),
+    movie_imdb_link CHAR(512),
+    num_user_for_reviews CHAR(512),
+    movie_language CHAR(512),
+    country CHAR(512),
+    content_rating CHAR(512),
+    budget INTEGER,
+    title_year INTEGER,
+    actor_2_facebook_likes INTEGER,
+    imdb_score DOUBLE,
+    aspect_ratio DOUBLE,
+    movie_facebook_likes INTEGER,
+    poster_url CHAR(512),
+    synopsis TEXT
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
