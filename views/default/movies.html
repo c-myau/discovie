@@ -5,6 +5,9 @@
 <head>
 </head>
 <body>
-{{=rows}}
+{{for item in rows:}}
+    <h1>
+    {{=item.movie_title}}
+    {{pass}}
 </body>
 </html>
