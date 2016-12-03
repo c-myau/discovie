@@ -49,13 +49,10 @@ def _():
     # useful links to internal and external resources
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
-        (T('Genres'), False, '#', [
-            (T('Action'), False, URL('default', 'movies')),
-            (T('Animation'), False, URL('default', 'movies')),
-            (T('Comedies'), False, URL('default', 'movies')),
-            (T('Horror'), False, URL('default', 'movies')),
-            (T('Contact Us'), False, URL('admin', 'default')),
-        ]),
+        (T('Action'), False, URL('default', 'movies')),
+        (T('Animation'), False, URL('default', 'movies')),
+        (T('Comedies'), False, URL('default', 'movies')),
+        (T('Horror'), False, URL('default', 'movies')),
         (T('Contact Us'), False, URL('admin', 'default', 'site')),
         (T('This App'), False, '#', [
             (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),

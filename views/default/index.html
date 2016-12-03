@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,86 +14,53 @@
 
     <!-- Custom styles for this template -->
     <link href="offcanvas.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body>
-    <div class="container">
+<body>
+<div class="container">
 
-      <div class="row row-offcanvas row-offcanvas-right">
+    <div class="row row-offcanvas row-offcanvas-right">
 
         <div class="col-xs-10 col-sm-9">
-          <div class="jumbotron">
-              <div class="imghome">
-                  <a href="{{=URL('index')}}">
+            <div class="jumbotron">
+                <div class="imghome">
+                    <a href="{{=URL('index')}}">
                         <img src="../static/images/dislogo.png" alt="Discovie Logo" style="max-width: 100%">
-                  </a>
-              </div>
-          </div>
-           <div class="container-list">
-            <div id="youtube-trailer" align="middle">
-                <!-- TO ADD A MOVIE go to URL/discovie/createyt -->
-                <h4><u>Now Playing in Theaters Trailers:</u> {{=rant.name}}</h4>
-                <iframe id="ytplayer" type="text/html" width=100% height="240"
-                        src="https://www.youtube.com/embed/{{=rant.youtube_id}}?autoplay=1&"
-                        frameborder="0">
-                </iframe>
+                    </a>
+                </div>
             </div>
+            <div class="container-list">
+                <div id="youtube-trailer" align="middle">
+                    <!-- TO ADD A MOVIE go to URL/discovie/createyt -->
+                    <h4><u>Now Playing in Theaters Trailers:</u> {{=rant.name}}</h4>
+                    <iframe id="ytplayer" type="text/html" width=100% height="240"
+                            src="https://www.youtube.com/embed/{{=rant.youtube_id}}?autoplay=1&"
+                            frameborder="0">
+                    </iframe>
+                </div>
             </div><!--/CL-->
-         <div class="container-list">
-          <div class="row">
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> {{=ranm[0].movie_title}} ({{=ranm[0].title_year}}) </h2>
-              <p>Genres: {{=ranm[0].genres}}</p>
-              <a class="btn btn-secondary" href={{=ranm[0].movie_imdb_link}} role="button">Check out the movie on IMDb!&raquo;</a>
+            <div class="container-list">
+                <div class="row">
+                {{for item in ranm:}}
+                    <div class="col-xs-6 col-lg-4">
+                        <img src={{=item.poster_url}} alt="singstreet" style="max-width:100%;height:auto;"
+                             srcset={{=item.poster_url}} 300w, {{=item.poster_url}} 547w"
+                        sizes="(max-width: 547px) 100vw, 547px">
+                        <h2> {{=item.movie_title}} ({{=item.title_year}}) </h2>
+                        <div class="sidebar-box">
+                            <p>{{=item.synopsis}} </p>
+                            <p class="read-more"><a href="#" class="button">Read More</a></p>
+                        </div>
+                        <p>Genres: {{=item.genres}}</p>
+                        <a class="btn btn-secondary" href={{=item.movie_imdb_link}} role="button">Check out the movie on
+                            IMDb!&raquo;</a>
+                    </div><!--/span-->
+                {{pass}}
+                </div><!--/row-->
             </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> {{=ranm[1].movie_title}} ({{=ranm[1].title_year}}) </h2>
-              <p>Genres: {{=ranm[1].genres}}</p>
-              <a class="btn btn-secondary" href={{=ranm[1].movie_imdb_link}} role="button">Check out the movie on IMDb!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> {{=ranm[2].movie_title}} ({{=ranm[2].title_year}}) </h2>
-              <p>Genres: {{=ranm[2].genres}}</p>
-              <a class="btn btn-secondary" href={{=ranm[2].movie_imdb_link}} role="button">Check out the movie on IMDb!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> {{=ranm[3].movie_title}} ({{=ranm[3].title_year}}) </h2>
-              <p>Genres: {{=ranm[3].genres}}</p>
-              <a class="btn btn-secondary" href={{=ranm[3].movie_imdb_link}} role="button">Check out the movie on IMDb!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> {{=ranm[4].movie_title}} ({{=ranm[4].title_year}}) </h2>
-              <p>Genres: {{=ranm[4].genres}}</p>
-              <a class="btn btn-secondary" href={{=ranm[4].movie_imdb_link}} role="button">Check out the movie on IMDb!&raquo;</a>
-            </div><!--/span-->
-            <div class="col-xs-6 col-lg-4">
-              <img src="http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg" alt="singstreet" style="max-width:100%;height:auto;"
-                   srcset="http://agoodmovietowatch.com/wp-content/uploads/singstreet-300x218.jpg 300w, http://agoodmovietowatch.com/wp-content/uploads/singstreet.jpg 547w"
-                   sizes="(max-width: 547px) 100vw, 547px">
-                <h2> {{=ranm[5].movie_title}} ({{=ranm[5].title_year}}) </h2>
-              <p>Genres: {{=ranm[5].genres}}</p>
-              <a class="btn btn-secondary" href={{=ranm[5].movie_imdb_link}} role="button">Check out the movie on IMDb!&raquo;</a>
-            </div><!--/span-->
-          </div><!--/row-->
-          </div><!--/span-->
-         </div><!--/span-->
+        </div><!--/span-->
 
-          <!-- SIDE BAR -->
+        <!-- SIDE BAR -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
             <!-- Login -->
             <div class="container-small">
@@ -103,7 +70,7 @@
                 {{if auth.user_id:}}
                     <a href="{{=URL('default', 'user', args=['logout'])}}" class="btn btn-danger">
                         <i class="fa fa-times" aria-hidden="true"></i> Logout</a>
-                    {{else:}}
+                {{else:}}
                     <a href="{{=URL('default', 'user', args=['login'])}}" class="btn btn-warning">
                         <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
                 {{pass}}
@@ -112,76 +79,89 @@
             </br> <!--padding-->
             <!-- SEARCH BOX CODE BEGINS -->
             <div class="container-search">
-            <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="Type a movie, actor, or genre you like" />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                  <div class="form-group">
-                                    <label for="filter">Filter by</label>
-                                    <select class="form-control">
-                                        <option value="0" selected>All Movies</option>
-                                        <option value="1">Featured</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">Top rated</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Actor</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Keywords</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
+                <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" placeholder="Type a movie, actor, or genre you like"/>
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="filter">Filter by</label>
+                                            <select class="form-control">
+                                                <option value="0" selected>All Movies</option>
+                                                <option value="1">Featured</option>
+                                                <option value="2">Most popular</option>
+                                                <option value="3">Top rated</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Actor</label>
+                                            <input class="form-control" type="text"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contain">Keywords</label>
+                                            <input class="form-control" type="text"/>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"
+                                                                                         aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"
+                                                                                aria-hidden="true"></span></button>
                         </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
+            <!-- Search box code ends! -->
+            <div class="container-sidebar">
+                <div class="list-group">
+                    <h5> Today's Recommended Movies</h5>
+                    <a href="http://agoodmovietowatch.com/13th-2016/" class="list-group-item">
+                        <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/13thmovie.jpg">
+                        13th (2016)</a>
+                    <a href="http://agoodmovietowatch.com/pariah-2011/" class="list-group-item">
+                        <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Pariah.jpg"> Pariah
+                        (2011)</a>
+                    <a href="http://agoodmovietowatch.com/ip-man-2010/" class="list-group-item">
+                        <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/ipman.jpg"> Ip Man
+                        (2008)</a>
+                    <a href="http://agoodmovietowatch.com/human-capital-2013/" class="list-group-item">
+                        <img height=50 width=50
+                             src="http://agoodmovietowatch.com/wp-content/uploads/Human_Capital_2_600.jpg"> Human
+                        Capital (2013)</a>
+                </div>
             </div>
-                <!-- Search box code ends! -->
-          <div class="container-sidebar">
-              <div class="list-group">
-                  <h5> Today's Recommended Movies</h5>
-                <a href="http://agoodmovietowatch.com/13th-2016/" class="list-group-item">
-                    <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/13thmovie.jpg"> 13th (2016)</a>
-                <a href="http://agoodmovietowatch.com/pariah-2011/" class="list-group-item">
-                    <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Pariah.jpg"> Pariah (2011)</a>
-                <a href="http://agoodmovietowatch.com/ip-man-2010/" class="list-group-item">
-                    <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/ipman.jpg"> Ip Man (2008)</a>
-                <a href="http://agoodmovietowatch.com/human-capital-2013/" class="list-group-item">
-                    <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Human_Capital_2_600.jpg"> Human Capital (2013)</a>
-              </div>
-          </div>
         </div><!--/span-->
-      </div><!--/row-->
+    </div><!--/row-->
 
-      <hr>
+    <hr>
 
-      <footer>
+    <footer>
         <p>&copy; CMPS 183: Discovie</p>
-          <p>All images, names, and trademarks are copyright and the property of their respective owners.</p>
-      </footer>
+        <p>All images, names, and trademarks are copyright and the property of their respective owners.</p>
+    </footer>
 
-    </div><!--/.container-->
+</div><!--/.container-->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="offcanvas.js"></script>
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"
+        integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
+        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
+        crossorigin="anonymous"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="offcanvas.js"></script>
+</body>
 </html>

@@ -39,7 +39,7 @@ def index():
     print trl_list
     movie_list = []
     j = 0
-    for row in db().select(db.movie_metadata.ALL):
+    for row in db().select(db.test_db.ALL):
         movie_list.append(row)
         j += 1
     randm = []
@@ -110,7 +110,7 @@ def genres():
 
 
 def movies():
-    rows = db().select(db.movie_metadata.ALL, limitby=(0, 100))
+    rows = db().select(db.test_db.ALL, limitby=(0, 100))
     return dict(rows=rows)
 
 def createyt():
