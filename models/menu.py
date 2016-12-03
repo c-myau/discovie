@@ -45,45 +45,61 @@ def _():
     # ------------------------------------------------------------------------------------------------------------------
     app = request.application
     ctr = request.controller
+    genres = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
+              'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
+              'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
     # ------------------------------------------------------------------------------------------------------------------
     # useful links to internal and external resources
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
+        (T('This App'), False, '#', [
+            (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
+            LI(_class="divider"),
+            (T('Controller'), False, URL('admin', 'default', 'edit/%s/controllers/%s.py' % (app, ctr))),
+            (T('View'), False, URL('admin', 'default', 'edit/%s/views/%s' % (app, response.view))),
+            (T('DB Model'), False, URL('admin', 'default', 'edit/%s/models/db.py' % app)),
+            (T('Menu Model'), False, URL('admin', 'default', 'edit/%s/models/menu.py' % app)),
+            (T('Config.ini'), False, URL('admin', 'default', 'edit/%s/private/appconfig.ini' % app)),
+            (T('Layout'), False, URL('admin', 'default', 'edit/%s/views/layout.html' % app)),
+            (T('Stylesheet'), False, URL('admin', 'default', 'edit/%s/static/css/web2py-bootstrap3.css' % app)),
+            (T('Database'), False, URL(app, 'appadmin', 'index')),
+            (T('Errors'), False, URL('admin', 'default', 'errors/' + app)),
+            (T('About'), False, URL('admin', 'default', 'about/' + app)),
+        ]),
+
+        (T('Genres'), False, '#', [
+            (T('Action'), False, URL('discovie', 'default', 'genres', args=['Action'])),
+            (T('Adventure'), False, URL('discovie', 'default', 'genres', args=['Adventure'])),
+            (T('Fantasy'), False, URL('discovie', 'default', 'genres', args=['Fantasy'])),
+            (T('Sci-Fi'), False, URL('discovie', 'default', 'genres', args=['Sci-Fi'])),
+            (T('Thriller'), False, URL('discovie', 'default', 'genres', args=['Thriller'])),
+            (T('Documentary'), False, URL('discovie', 'default', 'genres', args=['Documentary'])),
+            (T('Romance'), False, URL('discovie', 'default', 'genres', args=['Romance'])),
+            (T('Animation'), False, URL('discovie', 'default', 'genres', args=['Animation'])),
+            (T('Comedy'), False, URL('discovie', 'default', 'genres', args=['Comedy '])),
+            (T('Family'), False, URL('discovie', 'default', 'genres', args=['Family'])),
+            (T('Musical'), False, URL('discovie', 'default', 'genres', args=['Musical'])),
+            (T('Mystery'), False, URL('discovie', 'default', 'genres', args=['Mystery'])),
+            (T('Western'), False, URL('discovie', 'default', 'genres', args=['Western'])),
+            (T('Drama'), False, URL('discovie', 'default', 'genres', args=['Drama'])),
+            (T('History'), False, URL('discovie', 'default', 'genres', args=['History'])),
+            (T('Sport'), False, URL('discovie', 'default', 'genres', args=['Sport'])),
+            (T('Crime'), False, URL('discovie', 'default', 'genres', args=['Crime'])),
+            (T('Horror'), False, URL('discovie', 'default', 'genres', args=['Horror'])),
+            (T('War'), False, URL('discovie', 'default', 'genres', args=['War'])),
+            (T('Biography'), False, URL('discovie', 'default', 'genres', args=['Biography'])),
+            (T('Music'), False, URL('discovie', 'default', 'genres', args=['Music'])),
+            (T('Game-Show'), False, URL('discovie', 'default', 'genres', args=['Game-Show'])),
+            (T('Reality-TV'), False, URL('discovie', 'default', 'genres', args=['Reality-TV'])),
+            (T('News'), False, URL('discovie', 'default', 'genres', args=['News'])),
+            (T('Short'), False, URL('discovie', 'default', 'genres', args=['Short'])),
+            (T('Film-Noir'), False, URL('discovie', 'default', 'genres', args=['Film-Noir'])),
+        ]),
         (T('Action'), False, URL('default', 'movies')),
         (T('Animation'), False, URL('default', 'movies')),
         (T('Comedies'), False, URL('default', 'movies')),
         (T('Horror'), False, URL('default', 'movies')),
         (T('Contact Us'), False, URL('admin', 'default', 'site')),
-        (T('This App'), False, '#', [
-            (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
-            LI(_class="divider"),
-            (T('Controller'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/controllers/%s.py' % (app, ctr))),
-            (T('View'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/views/%s' % (app, response.view))),
-            (T('DB Model'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/models/db.py' % app)),
-            (T('Menu Model'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/models/menu.py' % app)),
-            (T('Config.ini'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/private/appconfig.ini' % app)),
-            (T('Layout'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/views/layout.html' % app)),
-            (T('Stylesheet'), False,
-             URL(
-                 'admin', 'default', 'edit/%s/static/css/web2py-bootstrap3.css' % app)),
-            (T('Database'), False, URL(app, 'appadmin', 'index')),
-            (T('Errors'), False, URL(
-                'admin', 'default', 'errors/' + app)),
-            (T('About'), False, URL(
-                'admin', 'default', 'about/' + app)),
-        ]),
     ]
 
 

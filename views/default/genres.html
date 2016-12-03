@@ -2,8 +2,20 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  </head>
-  <body>
-  </body>
+<head>
+</head>
+<body>
+{{for item in rows:}}
+<div class="container-list">
+    <div class="row">
+        <div class="">
+            <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
+            <p>Directed By {{=item.director_name}}</p>
+            <img style="max-width:15%;height:auto;" src={{=item.poster_url}}>
+            <p>{{=item.synopsis}}</p>
+        </div><!--/span-->
+    </div><!--/row-->
+</div><!--/span-->
+{{pass}}
+</body>
 </html>

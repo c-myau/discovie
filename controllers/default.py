@@ -110,7 +110,9 @@ def directors():
 
 
 def genres():
-    return dict()
+    genre = request.args[0]
+    rows = db(db.test_db.genres.contains(genre)).select()
+    return dict(rows=rows)
 
 
 def movies():
