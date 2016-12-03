@@ -18,10 +18,13 @@ myconf = AppConfig(reload=True)
 
 if not request.env.web2py_runtime_gae:
     # if NOT running on Google App Engine use SQLite or other DB
-    db = DAL(myconf.get('db.uri'),
-             pool_size=myconf.get('db.pool_size'),
-             migrate_enabled=myconf.get('db.migrate'),
-             check_reserved=['all'])
+    # db = DAL(myconf.get('db.uri'),
+    #          pool_size=myconf.get('db.pool_size'),
+    #          migrate_enabled=myconf.get('db.migrate'),
+    #          check_reserved=['all'])
+
+    db = DAL('mysql://acchiao:asdf1234@mysql.server/acchiao$sandbox_db', pool_size=1, check_reserved=['all'])
+
     # I like to keep the session in the db.
     session.connect(request, response, db=db)
 else:
