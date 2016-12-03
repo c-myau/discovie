@@ -37,9 +37,17 @@ def index():
         i += 1
     print i
     print trl_list
+    movie_list = []
+    j = 0
+    for row in db().select(db.movie_metadata.ALL):
+        movie_list.append(row)
+        j += 1
+    randm = []
+    for x in range(0, 6):
+        randm.append(movie_list[random.randint(0, j-1)])
     randt = trl_list[random.randint(0,i-1)]
     print randt
-    return dict(trl=trl_list, rant=randt)
+    return dict(trl=trl_list, rant=randt, ranm=randm)
 
 
 def userprefs():
