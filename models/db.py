@@ -24,14 +24,14 @@ if not request.env.web2py_runtime_gae:
     #          check_reserved=['all'])
 
     # local sandbox database
-    db = DAL('mysql://root:asdf1234@localhost/test',
-             pool_size=1,
-             check_reserved=['all'])
-
-    # pythonanywhere production database
-    # db = DAL('mysql://acchiao:asdf1234@mysql.server/acchiao$sandbox_db',
+    # db = DAL('mysql://root:asdf1234@localhost/test',
     #          pool_size=1,
     #          check_reserved=['all'])
+
+    # pythonanywhere production database
+    db = DAL('mysql://acchiao:asdf1234@mysql.server/acchiao$sandbox_db',
+             pool_size=1,
+             check_reserved=['all'])
 
     # I like to keep the session in the db.
     session.connect(request, response, db=db)
