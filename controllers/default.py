@@ -35,8 +35,6 @@ def index():
     for row in db().select(db.trailers_metadata.ALL):
         trl_list.append(row)
         i += 1
-    # print i
-    # print trl_list
     movie_list = []
     j = 0
     for row in db().select(db.movie_metadata.ALL):
@@ -50,7 +48,6 @@ def index():
         randm2.append(movie_list[random.randint(0, j - 1)])
         randm3.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0, i - 1)]
-    # print randt
     genre = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
              'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
              'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
