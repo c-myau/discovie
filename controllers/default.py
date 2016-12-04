@@ -44,12 +44,14 @@ def index():
         j += 1
     randm1 = []
     randm2 = []
+    randm3 = []
     for x in range(0, 3):
         randm1.append(movie_list[random.randint(0, j - 1)])
         randm2.append(movie_list[random.randint(0, j - 1)])
+        randm3.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0, i - 1)]
     print randt
-    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2)
+    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3)
 
 
 def userprefs():
