@@ -34,7 +34,7 @@ var app = function () {
         },
         methods: {
             get_movies: self.get_movies,
-            do_search: self.get_movies,
+            do_search: self.get_movies
         }
     });
 
