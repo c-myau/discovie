@@ -164,30 +164,5 @@ var APP = null;
 // for instance, self.x above would be accessible as APP.x
 jQuery(function(){APP = app();});
 
-function hideEditBtn(obj) {
-    $(obj).hide();
-    $(obj).parent().find("#saveBtn").show();
-    $(obj).parent().find("#cancelBtn").show();
-    $(obj).parent().prev().find("#post").hide();
-    $(obj).parent().prev().find("#textarea").show();
-
-}
-
-function hidePostBtn(obj) {
-    $(obj).hide();
-    $(obj).parent().find("#editBtn").show();
-    $(obj).parent().find("#cancelBtn").hide();
-    $(obj).parent().prev().find("#post").show();
-    $(obj).parent().prev().find("#textarea").hide();
-}
-
-function hideCancelBtn(obj, temp) {
-    $(obj).hide();
-    $(obj).parent().find("#editBtn").show();
-    $(obj).parent().find("#saveBtn").hide();
-    $(obj).parent().prev().find("#post").show();
-    $(obj).parent().prev().find("#textarea").hide();
-    var text = $(obj).parent().prev().find("#textarea").val();
-}
 
 

@@ -132,19 +132,11 @@
             <div class="container-sidebar">
                 <div class="list-group">
                     <h5> Today's Recommended Movies</h5>
-                    <a href="http://agoodmovietowatch.com/13th-2016/" class="list-group-item">
-                        <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/13thmovie.jpg">
-                        13th (2016)</a>
-                    <a href="http://agoodmovietowatch.com/pariah-2011/" class="list-group-item">
-                        <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/Pariah.jpg"> Pariah
-                        (2011)</a>
-                    <a href="http://agoodmovietowatch.com/ip-man-2010/" class="list-group-item">
-                        <img height=50 width=50 src="http://agoodmovietowatch.com/wp-content/uploads/ipman.jpg"> Ip Man
-                        (2008)</a>
-                    <a href="http://agoodmovietowatch.com/human-capital-2013/" class="list-group-item">
-                        <img height=50 width=50
-                             src="http://agoodmovietowatch.com/wp-content/uploads/Human_Capital_2_600.jpg"> Human
-                        Capital (2013)</a>
+                    {{for item in ranm3:}}
+                        <a href={{=item.movie_imdb_link}} class="list-group-item">
+                            <img height=50 width=50 src={{=item.poster_url}}>
+                        {{=item.movie_title}} ({{=item.title_year}})</a>
+                    {{pass}}
                 </div>
             </div>
         </div><!--/span-->
@@ -154,8 +146,8 @@
 
     <footer>
         <div class="container-sidebar">
-        <p>&copy; CMPS 183: Discovie</p>
-        <p>All images, names, and trademarks are copyright and the property of their respective owners.</p>
+            <p>&copy; CMPS 183: Discovie</p>
+            <p>All images, names, and trademarks are copyright and the property of their respective owners.</p>
         </div>
     </footer>
 
