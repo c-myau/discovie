@@ -8,7 +8,6 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 import re
-import time
 import random
 
 stoplist = [
@@ -19,14 +18,6 @@ stoplist = [
     "of", "in",
     "and",
 ]
-
-IMAGE_URLS = [
-    'https://storage.googleapis.com/lucadealfaro-share/img1.jpg',
-    'https://storage.googleapis.com/lucadealfaro-share/img2.jpg',
-    'https://storage.googleapis.com/lucadealfaro-share/img3.jpg',
-    'https://storage.googleapis.com/lucadealfaro-share/img4.jpg',
-]
-
 
 def index():
     """
@@ -138,13 +129,13 @@ def top():
 
 def get_movies():
     search_string = request.vars.q.strip()
-    rows = db().select(db.movie_metadata.ALL)
+    rows = db().select(db.movie_metadata.ALL, limitby=(0, 100))
     movie_list = []
     sublist = []
     title_list = []
     original_list = []
 
-    # Starting algorithm, start by finding all words with a size greater than 2
+    #Starting algorithm, start by finding all words with a size greater than 2
     for r in rows:
         append_list = re.findall(r'[A-z0-9][A-z0-9]+', r.movie_title)
         if len(append_list):
@@ -154,23 +145,23 @@ def get_movies():
     i = 0
     removal = 0
 
-    # each title in the title is another title
+    #each title in the title is another title
     for title in title_list:
         k = 0
 
-        # this code changes all words to lower case if not already, makes the word non-plural. No I can't actually
-        # tell if it's plural, but as long as I apply the same technique to incoming search terms the result is the same
+        #this code changes all words to lower case if not already, makes the word non-plural. No I can't actually
+        #tell if it's plural, but as long as I apply the same technique to incoming search terms the result is the same
         for word in title:
             title[k] = word.lower()
             if title[k][-1] == 's' and title[k][-2] != 's':
                 title[k] = title[k][:-1]
-            k += 1
+            k+=1
 
         s_word = 0
         removal = 0
 
-        # This code removes useless words that can't be used as keywords. The funny stuff with the while loop is because
-        # of the array removal causing shenanagins
+        #This code removes useless words that can't be used as keywords. The funny stuff with the while loop is because
+        #of the array removal causing shenanagins
         while s_word < len(title):
             for stop_word in stoplist:
                 if title[s_word] == stop_word:
@@ -181,13 +172,14 @@ def get_movies():
             else:
                 s_word += 1
 
-    # This code starts both the query parsing as well as the scoring algorithm
-    # good shit right here
+
+    #This code starts both the query parsing as well as the scoring algorithm
+    #good shit right here
     if request.vars.q.strip():
         high_list = []
         high_original = []
 
-        # parse the search terms using the same methods as the titles to ensure compaitbility
+        #parse the search terms using the same methods as the titles to ensure compaitbility
         search_list = [x for x in re.findall(r'[A-z0-9][A-z0-9]+', request.vars.q)]
 
         i = 0
@@ -225,9 +217,9 @@ def get_movies():
             #              2 x [# of searched words]      2 x [# of words in movie title]
             search_score = float(search_match) / (len(search_list) * 2) + float(search_match) / (len(list) * 2)
 
-            # Scorekeeping
+            #Scorekeeping
             if search_score > highest_score:
-                # print(original_list[index])
+                #print(original_list[index])
                 sublist = []
                 sublist.append(original_list[index])
                 sublist.append(search_score)
@@ -236,14 +228,14 @@ def get_movies():
 
                 highest_score = search_score
             elif search_score > 0.3:
-                # print(original_list[index])
+                #print(original_list[index])
                 sublist = []
                 sublist.append(original_list[index])
                 sublist.append(search_score)
                 high_original.append(sublist)
             sublist = []
             index += 1
-            # end for loop
+            #end for loop
         for item in high_original:
             sublist = []
             r = db(db.movie_metadata.movie_title == item[0]).select().first()
@@ -253,28 +245,27 @@ def get_movies():
             sublist.append(r.genres)
             sublist.append(r.synopsis)
             sublist.append(r.content_rating)
-            sublist.append(r.movie_poster_link)
+            sublist.append(r.poster_url)
             sublist.append(r.movie_imdb_link)
 
             movie_list.append(sublist)
 
     else:
         for r in rows:
-            # append items to the list of lists of lists of lists of lists of lists
+            #append items to the list of lists of lists of lists of lists of lists
             sublist.append(r.movie_title)
             sublist.append(r.director_name)
             sublist.append(r.imdb_score)
             sublist.append(r.genres)
             sublist.append(r.synopsis)
             sublist.append(r.content_rating)
-            sublist.append(r.movie_poster_link)
+            sublist.append(r.poster_url)
             sublist.append(r.movie_imdb_link)
 
             movie_list.append(sublist)
             sublist = []
 
     return response.json(dict(movie_list=movie_list))
-
 
 def movies():
     return dict()
