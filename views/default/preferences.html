@@ -44,7 +44,7 @@
     <div id="movies_catalog">
     {{for mv in rows:}}
         <div class="col-xs-3" style=" width: 185px; height: 278px;">
-            <a href="{{=mv.movie_imdb_link}}"><img src="{{=mv.poster_url}}" width="185" height="278">{{=mv.movie_title}}
+            <a href="{{=mv.movie_imdb_link}}"><img src="{{=mv.movie_poster_link}}" width="185" height="278">{{=mv.movie_title}}
             </a>
             <div>
                 <span v-on:mouseout="mouse_out(img._idx)">
