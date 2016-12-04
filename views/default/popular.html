@@ -3,16 +3,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-$(document).ready(function () {
-    $(".content").hide();
-    $(".show_hide").on("click", function () {
-        var txt = $(".content").is(':visible') ? 'Toggle Full Description' : 'Toggle Full Description';
-        $(".show_hide").text(txt);
-        $(this).next('.content').slideToggle(200);
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script><script type="text/javascript" src="http://tester3.yolasite.com/resources/javascript/jtruncate.js"></script><script type="text/javascript">// <![CDATA[
+    // Settings for script
+    $(document).ready(function() {
+    $('.text').jTruncate({
+    length: 400, /* The number of characters to display before truncating. */
+
+    minTrail: 0, /* The minimum number of "extra" characters required to truncate. This option allows you to prevent truncation of a section of text that is only a few characters longer than the specified length. */
+
+    moreText: "Read More", // The text to use for the "more" link.
+    lessText: "Read Less", // The text to use for the "less" link.
+    ellipsisText: "...", // The text to append to the truncated portion.
     });
-});
-</script>
+    });
+    // ]]></script>
+
 </head>
 </br></br>
 <body>
@@ -27,8 +32,7 @@ $(document).ready(function () {
             <div style="display:inline-block">
             <img style="width: 140px;height: 200px;float:left"src={{=item.poster_url}}>
                 <div class="movies-text-inline" style="padding-left: 160px">
-            <a href="#/" class="show_hide" data-content="toggle-text">Click here for full description of the movie</a>
-            <div class="content">
+            <div class="text">
             <p>{{=item.synopsis}}</p>
             </div>
                 </div> <!--movies text inline-->

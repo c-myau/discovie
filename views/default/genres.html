@@ -3,19 +3,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script><script type="text/javascript" src="http://tester3.yolasite.com/resources/javascript/jtruncate.js"></script><script type="text/javascript">// <![CDATA[
+    // Settings for script
+    $(document).ready(function() {
+    $('.text').jTruncate({
+    length: 400, /* The number of characters to display before truncating. */
+
+    minTrail: 0, /* The minimum number of "extra" characters required to truncate. This option allows you to prevent truncation of a section of text that is only a few characters longer than the specified length. */
+
+    moreText: "Read More", // The text to use for the "more" link.
+    lessText: "Read Less", // The text to use for the "less" link.
+    ellipsisText: "...", // The text to append to the truncated portion.
+    });
+    });
+    // ]]></script>
+
 </head>
+</br></br>
 <body>
+
+<div class="row row-offcanvas row-offcanvas-right">
 {{for item in rows:}}
 <div class="container-list">
-    <div class="row">
+    <div class="row" id="movies-containers">
         <div>
             <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
-            <p>Directed By {{=item.director_name}}</p>
-            <img style="max-width:15%;height:auto;" src={{=item.poster_url}}>
+            <p><b>Directed By {{=item.director_name}}</b></p>
+            <div style="display:inline-block">
+            <img style="width: 140px;height: 200px;float:left"src={{=item.poster_url}}>
+                <div class="movies-text-inline" style="padding-left: 160px">
+            <div class="text">
             <p>{{=item.synopsis}}</p>
+            </div>
+                </div> <!--movies text inline-->
+                </div> <!--inline-->
         </div><!--/span-->
     </div><!--/row-->
 </div><!--/span-->
-{{pass}}
+    {{pass}}
+    </div>
 </body>
 </html>
