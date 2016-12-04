@@ -6,12 +6,11 @@
 
     <script src="{{=URL('static', 'js/vue.js')}}"></script>
     <script>
-        var get_info_url = "{{=URL('ratings', 'get_info')}}";
-        var vote_url = "{{= URL('ratings', 'vote', user_signature=True) if auth.user_id else ''}}";
+        var get_info_url = "{{=URL('api', 'get_info')}}";
+        var vote_url = "{{= URL('api', 'vote', user_signature=True) if auth.user_id else ''}}";
         var is_logged_in = "{{='true' if auth.user_id else 'false'}}";
     </script>
 </head>
-
 
 <div class="main_content">
     <div class="user-preference-top">
