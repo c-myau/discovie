@@ -31,7 +31,7 @@ def index():
     if auth.user_id is not None: ()
     trl_list = []
     i = 0
-    for row in db().select(db.trailers_metadata.ALL, limitby=(0, 50)):
+    for row in db().select(db.trailer_metadata.ALL, limitby=(0, 50)):
         trl_list.append(row)
         i += 1
     movie_list = []

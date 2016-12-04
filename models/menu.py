@@ -52,6 +52,7 @@ def _():
     # useful links to internal and external resources
     # ------------------------------------------------------------------------------------------------------------------
     response.menu += [
+        (T('Movies'), False, URL('discovie', 'default', 'movies')),
         (T('Popular'), False, URL('discovie', 'default', 'popular')),
         (T('Top'), False, URL('discovie', 'default', 'top')),
         (T('Genres'), False, '#', [

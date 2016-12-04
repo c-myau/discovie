@@ -41,7 +41,7 @@ db.define_table('movie_metadata',
                 Field('movie_trailer_link', 'string'),
                 Field('movie_imdb_link', 'string'))
 
-db.define_table('trailers_metadata',
+db.define_table('trailer_metadata',
                 Field('movie_title', 'string', required=True),
                 Field('youtube_id', 'string', required=True))
 
