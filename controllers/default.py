@@ -136,9 +136,3 @@ def movies():
     rows = db().select(db.test_db.ALL, limitby=(0, 100))
     return dict(rows=rows)
 
-
-def createyt():
-    form = SQLFORM(db.yt_trailers)
-    if form.process().accepted:
-        response.flash = "Youtube trailer created"
-    return dict(form=form)
