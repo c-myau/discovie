@@ -51,7 +51,10 @@ def index():
         randm3.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0, i - 1)]
     # print randt
-    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3)
+    genres = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
+               'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
+               'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
+    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3, genres=genres)
 
 
 def userprefs():
