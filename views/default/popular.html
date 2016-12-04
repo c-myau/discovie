@@ -3,19 +3,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+$(document).ready(function () {
+    $(".content").hide();
+    $(".show_hide").on("click", function () {
+        var txt = $(".content").is(':visible') ? 'Toggle Full Description' : 'Toggle Full Description';
+        $(".show_hide").text(txt);
+        $(this).next('.content').slideToggle(200);
+    });
+});
+</script>
 </head>
+</br></br>
 <body>
+
+<div class="row row-offcanvas row-offcanvas-right">
 {{for item in rows:}}
 <div class="container-list">
-    <div class="row">
-    <div>
+    <div class="row" id="movies-containers">
+        <div>
             <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
-            <img src={{=item.poster_url}} style="max-width:25%;height:auto;">
+            <p><b>Directed By {{=item.director_name}}</b></p>
+            <div style="display:inline-block">
+            <img style="width: 140px;height: 200px;float:left"src={{=item.poster_url}}>
+                <div class="movies-text-inline" style="padding-left: 160px">
+            <a href="#/" class="show_hide" data-content="toggle-text">Click here for full description of the movie</a>
+            <div class="content">
             <p>{{=item.synopsis}}</p>
-            <p>Directed By {{=item.director_name}}</p>
+            </div>
+                </div> <!--movies text inline-->
+                </div> <!--inline-->
         </div><!--/span-->
     </div><!--/row-->
 </div><!--/span-->
-{{pass}}
+    {{pass}}
+    </div>
 </body>
 </html>
