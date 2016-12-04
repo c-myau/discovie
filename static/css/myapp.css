@@ -221,3 +221,8 @@
     background-image: linear-gradient(to bottom, transparent, black);
 }
 
+/* movies.html */
+#movies-containers{
+    padding-left: 30px;
+    padding-right: 30px;
+}
