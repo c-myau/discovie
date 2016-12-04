@@ -55,7 +55,7 @@ def index():
 def userprefs():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
-         def get_num_stars(mv_idx):
+    def get_num_stars(mv_idx):
         if not auth.user_id:
             return None
         r = db((db.rating.user_id == auth.user_id) & (db.rating.moviedb == mv_idx)).select().first()
@@ -69,7 +69,7 @@ def userprefs():
     print movie_list
     return dict(mvrate=movie_list)
 
-    @auth.requires_signature()
+@auth.requires_signature()
 def vote():
     mid = int(request.vars.mid) #mid = movie id
     num_stars = int(request.vars.rating)
