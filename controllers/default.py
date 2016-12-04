@@ -42,19 +42,12 @@ def index():
     for row in db().select(db.test_db.ALL):
         movie_list.append(row)
         j += 1
-<<<<<<< HEAD
     randm1 = []
     randm2 = []
     for x in range(0, 3):
         randm1.append(movie_list[random.randint(0, j-1)])
         randm2.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0,i-1)]
-=======
-    randm = []
-    for x in range(0, 6):
-        randm.append(movie_list[random.randint(0, j - 1)])
-    randt = trl_list[random.randint(0, i - 1)]
->>>>>>> ac0ec345849400683cb5cb746ce97f0e1c3155b2
     print randt
     return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2 = randm2)
 
