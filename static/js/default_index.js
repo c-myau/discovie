@@ -6,6 +6,14 @@ var app = function () {
 
     Vue.config.silent = false; // show all warnings
 
+    // Enumerates an array.
+    var enumerate = function (v) {
+        var k = 0;
+        return v.map(function (e) {
+            e._idx = k++;
+        });
+    };
+
     // Gets movies
     self.get_movies = function () {
         //alert('Hello ' + this.name + '!');
@@ -17,83 +25,20 @@ var app = function () {
 
     };
 
-    // Enumerates an array.
-    var enumerate = function (v) {
-        var k = 0;
-        return v.map(function (e) {
-            e._idx = k++;
-        });
-    };
-
-    // Extends an array
-    self.extend = function (a, b) {
-        for (var i = 0; i < b.length; i++) {
-            a.push(b[i]);
-        }
-    };
-
-    // Decorate the array of images.
-    var decorate = function (v) {
-        return v.map(function (e) {
-            e._pending = false;
-        });
-    };
-
-    self.get_info = function () {
-        $.getJSON(get_info_url, function (data) {
-            self.vue.image_list = data.image_list;
-            enumerate(self.vue.image_list);
-            decorate(self.vue.image_list);
-        });
-    };
-
-    self.mouse_over = function (img_idx, star_idx) {
-        self.vue.image_list[img_idx].num_stars_display = star_idx;
-    };
-
-    self.mouse_out = function (img_idx) {
-        self.vue.image_list[img_idx].num_stars_display = self.vue.image_list[img_idx].num_stars;
-    };
-
-    self.set_stars = function (img_idx, star_idx) {
-        var img = self.vue.image_list[img_idx];
-        img.num_stars = star_idx;
-        img._pending = true;
-        self.vue.$set(self.vue.image_list, img_idx, img);
-        $.post(vote_url,
-            {
-                image_id: img.id,
-                num_stars: star_idx
-            },
-            function () {
-                img = self.vue.image_list[img_idx];
-                img._pending = false;
-                self.vue.$set(self.vue.image_list, img_idx, img);
-            }
-        )
-    };
-
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
             movie_list: [],
-            movie_search: '',
-            image_list: [],
-            is_logged_in: is_logged_in,
-            star_indices: [1, 2, 3, 4, 5]
+            movie_search: ''
         },
         methods: {
             get_movies: self.get_movies,
             do_search: self.get_movies,
-            mouse_over: self.mouse_over,
-            mouse_out: self.mouse_out,
-            set_stars: self.set_stars
         }
     });
 
-    self.get_info();
     self.get_movies();
     $("#vue-div").show();
 

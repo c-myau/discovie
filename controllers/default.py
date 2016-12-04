@@ -278,39 +278,3 @@ def get_movies():
 
 def movies():
     return dict()
-
-
-# Voting
-
-def get_info():
-    def get_num_stars(img_idx):
-        if not auth.user_id:
-            return None
-        r = db((db.rating.user_id == auth.user_id) & (db.rating.movie_id == img_idx)).select().first()
-        return 0 if r is None else r.stars
-
-    image_list = []
-    rows = db().select(db.movie_metadata.ALL)
-    for i, img_url in enumerate(rows):
-        n = get_num_stars(i)
-        image_list.append(dict(
-            url=img_url,
-            num_stars=n,
-            num_stars_display=n,  # To facilitate vue
-            id=i,
-        ))
-    return response.json(dict(image_list=image_list))
-
-
-@auth.requires_signature()
-def vote():
-    picid = int(request.vars.movie_id)
-    num_stars = int(request.vars.stars)
-    db.rating.update_or_insert(
-        ((db.rating.image_id == picid) & (db.rating.user_id == auth.user_id)),
-        image_id=picid,
-        user_id=auth.user_id,
-        num_stars=num_stars
-    )
-    time.sleep(0.5)  # To make testing easier.
-    return "ok"
