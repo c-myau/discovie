@@ -8,7 +8,6 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 import re
-import time
 import random
 
 stoplist = [
@@ -127,55 +126,6 @@ def popular():
 def top():
     rows = db(db.movie_metadata.imdb_score).select(limitby=(0, 25), orderby=~db.movie_metadata.imdb_score)
     return dict(rows=rows)
-
-
-IMAGE_URLS = [
-    'https://storage.googleapis.com/lucadealfaro-share/img1.jpg',
-    'https://storage.googleapis.com/lucadealfaro-share/img2.jpg',
-    'https://storage.googleapis.com/lucadealfaro-share/img3.jpg',
-    'https://storage.googleapis.com/lucadealfaro-share/img4.jpg',
-]
-
-
-def get_num_stars(img_idx):
-    if not auth.user_id:
-        return None
-    r = db((db.rating.user_id == auth.user_id) & (db.rating.movie_id == img_idx)).select().first()
-    return 0 if r is None else r.stars
-
-
-def get_info():
-    rows = db().select(db.movie_metadata.ALL)
-    if not auth.user_id:
-        return None
-    r = db((db.rating.user_id == auth.user_id) & (db.rating.movie_id == img_idx)).select().first()
-    return 0 if r is None else r.stars
-
-    image_list = []
-    for i, movie in enumerate(rows):
-        print(movie)
-        n = get_num_stars(i)
-        image_list.append(dict(
-            url=movie,
-            stars=n,
-            num_stars_display=n,  # To facilitate vue
-            id=i,
-        ))
-    return response.json(dict(image_list=image_list))
-
-
-@auth.requires_signature()
-def vote():
-    picid = int(request.vars.movie_id)
-    num_stars = int(request.vars.num_stars)
-    db.rating.update_or_insert(
-        ((db.rating.movie_id == picid) & (db.rating.user_id == auth.user_id)),
-        movie_id=picid,
-        user_id=auth.user_id,
-        num_stars=num_stars
-    )
-    time.sleep(0.5)  # To make testing easier.
-    return "ok"
 
 
 def get_movies():
