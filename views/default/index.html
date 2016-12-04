@@ -133,12 +133,20 @@
             </div>
             <!-- Search box code ends! -->
             <div class="container-sidebar">
-                <div class="list-group">
-                    <h5> Today's Recommended Movies</h5>
+                    <h4> Today's Recommended Movies</h4>
                     {{for item in ranm3:}}
                         <a href={{=item.movie_imdb_link}} class="list-group-item">
                             <img height=50 width=50 src={{=item.poster_url}}>
                         {{=item.movie_title}} ({{=item.title_year}})</a>
+                    {{pass}}
+            </div>
+
+
+            <div class="container-sidebar">
+                <div class="list-group">
+                    <h4> Sort movies by genre </h4>
+                    {{for genre in genres:}}
+                    <a href=default/genres/{{=genre}}> {{=genre}}</a>
                     {{pass}}
                 </div>
             </div>
