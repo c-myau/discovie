@@ -12,7 +12,6 @@
 /errors/
 /sessions/
 / private /
-/databases/
 
 # Mac
 .DS_Store
