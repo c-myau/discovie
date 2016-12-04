@@ -42,12 +42,19 @@ def index():
     for row in db().select(db.test_db.ALL):
         movie_list.append(row)
         j += 1
+<<<<<<< HEAD
     randm1 = []
     randm2 = []
     for x in range(0, 3):
         randm1.append(movie_list[random.randint(0, j-1)])
         randm2.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0,i-1)]
+=======
+    randm = []
+    for x in range(0, 6):
+        randm.append(movie_list[random.randint(0, j - 1)])
+    randt = trl_list[random.randint(0, i - 1)]
+>>>>>>> ac0ec345849400683cb5cb746ce97f0e1c3155b2
     print randt
     return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2 = randm2)
 
@@ -55,13 +62,15 @@ def index():
 def userprefs():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
-    if auth.user_id is not None:()
+    if auth.user_id is not None: ()
     return dict()
+
 
 def userprefs():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
     return dict()
+
 
 def user():
     """
@@ -81,9 +90,10 @@ def user():
     """
     # Redirects user to users preference page
     auth.settings.login_next = URL('default', 'userprefs')
-    #Redirects user to users preference page
-    auth.settings.login_next = URL('default','userprefs')
+    # Redirects user to users preference page
+    auth.settings.login_next = URL('default', 'userprefs')
     return dict(form=auth())
+
 
 @cache.action()
 def download():
@@ -103,20 +113,33 @@ def call():
     """
     return service()
 
+
 def directors():
     return dict()
 
 
 def genres():
-    return dict()
+    genre = request.args[0]
+    rows = db(db.test_db.genres.contains(genre)).select()
+    return dict(rows=rows)
+
+
+def popular():
+    rows = db(db.test_db.movie_facebook_likes).select(orderby=~db.test_db.movie_facebook_likes)
+    return dict(rows=rows)
+
+def top():
+    rows = db(db.test_db.imdb_score).select(orderby=~db.test_db.imdb_score)
+    return dict(rows=rows)
 
 
 def movies():
     rows = db().select(db.test_db.ALL, limitby=(0, 100))
     return dict(rows=rows)
 
+
 def createyt():
     form = SQLFORM(db.yt_trailers)
     if form.process().accepted:
-        response.flash="Youtube trailer created"
+        response.flash = "Youtube trailer created"
     return dict(form=form)

@@ -22,6 +22,18 @@ if not request.env.web2py_runtime_gae:
              pool_size=myconf.get('db.pool_size'),
              migrate_enabled=myconf.get('db.migrate'),
              check_reserved=['all'])
+
+    # local sandbox database
+    # db = DAL('mysql://root:asdf1234@localhost/test',
+    #          pool_size=1,
+    #          check_reserved=['all'])
+
+    # pythonanywhere production database
+    # db = DAL('mysql://acchiao:asdf1234@acchiao.mysql.pythonanywhere-services.com/acchiao$sandbox_db',
+    #          pool_size=1,
+    #          check_reserved=['all'],
+    #          fake_migrate_all=True)
+
     # I like to keep the session in the db.
     session.connect(request, response, db=db)
 else:
