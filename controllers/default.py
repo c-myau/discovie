@@ -35,8 +35,8 @@ def index():
     for row in db().select(db.yt_trailers.ALL):
         trl_list.append(row)
         i += 1
-    print i
-    print trl_list
+    # print i
+    # print trl_list
     movie_list = []
     j = 0
     for row in db().select(db.test_db.ALL):
@@ -50,8 +50,9 @@ def index():
         randm2.append(movie_list[random.randint(0, j - 1)])
         randm3.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0, i - 1)]
-    print randt
+    # print randt
     return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3)
+
 
 
 def userprefs():
