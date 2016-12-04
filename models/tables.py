@@ -96,7 +96,7 @@ db.define_table('yt_trailers',
 
 db.define_table('rating',
                 Field('user_id', db.auth_user, default=auth.user_id),
-                Field('moviedb', db.test_db.movie_id),
+                Field('moviedb', db.test_db),
                 Field('num_stars', 'integer', required=False), # number of stars the user voted
                 Field('rating', "float", required=False), # rating average [see formula in default.py/def vote()]
                 Field('votecount', 'integer', required=False)) # number of votes total the movie had
