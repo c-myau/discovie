@@ -1,5 +1,6 @@
 {{extend 'layout.html'}}
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,28 +22,53 @@
     // ]]></script>
 
 </head>
-</br></br>
-<body>
 
-<div class="row row-offcanvas row-offcanvas-right">
-{{for item in rows:}}
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var movies_url = "{{=URL('default', 'get_movies')}}";
+</script>
+{{end}}
+
+<body>
+<div id="vue-div">
     <div class="container-list">
-        <div class="row" id="movies-containers">
-            <div>
-                <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
-                <p><b>Directed By {{=item.director_name}}</b></p>
-                <div style="display:inline-block">
-                    <img style="width: 140px;height: 200px;float:left" src={{=item.movie_poster_link}}>
-                    <div class="movies-text-inline" style="padding-left: 160px">
-                        <div class="text">
-                            <p>{{=item.synopsis}}</p>
-                        </div>
-                    </div> <!--movies text inline-->
-                </div> <!--inline-->
-            </div><!--/span-->
+        <div class="container">
+            <div class="row">
+                <h2>Movie Search Box</h2>
+                   <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input v-on:keyup.enter="do_search" class="  search-query form-control" placeholder="Movie Search" v-model="movie_search"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger"  v-on:click="do_search" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-for="movie in movie_list" class="container-list">
+        <div class="row">
+            <div class="col-xs-10 col-lg-4">
+                <div>
+                    <img v-bind:src="movie[6]" style="max-width:15%;height:auto;"/>
+                </div>
+                <h4> ${movie[0]}</h4>
+                <p>Director ${movie[1]}</p>
+                <p> IMDB Rating: ${movie[2]}</p>
+                <p>Genre ${movie[3]}</p>
+                <p>${movie[4]}</p>
+                <p>(${movie[5]})</p>
+                <!--/span-->
+                <a class="btn btn-secondary" v-bind:href="movie[7]" role="button">IMDB Link</a>
+            </div>
         </div><!--/row-->
     </div><!--/span-->
-{{pass}}
 </div>
+{{pass}}
 </body>
 </html>
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
