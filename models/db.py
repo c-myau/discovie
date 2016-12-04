@@ -24,7 +24,7 @@ if not request.env.web2py_runtime_gae:
              check_reserved=['all'])
 
     # local sandbox database
-    # db = DAL('mysql://root:asdf1234@localhost/test',
+    # db = DAL('mysql://root:root@localhost/new_schema',
     #          pool_size=1,
     #          check_reserved=['all'])
 

@@ -39,7 +39,7 @@ def index():
     # print trl_list
     movie_list = []
     j = 0
-    for row in db().select(db.test_db.ALL):
+    for row in db().select(db.movie_metadata.ALL):
         movie_list.append(row)
         j += 1
     randm1 = []
@@ -51,22 +51,23 @@ def index():
         randm3.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0, i - 1)]
     # print randt
-    genres = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
-               'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
-               'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
-    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3, genres=genres)
+    genre = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
+             'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
+             'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
+    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3, genres=genre)
 
 
-def userprefs():
+@auth.requires_signature()
+def preferences():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
-    rows = db().select(db.test_db.ALL, limitby=(0, 100))
+    rows = db().select(db.movie_metadata.ALL, limitby=(0, 100))
     return dict(rows=rows)
 
 
-def movie_page():
+def page():
     movie_id = 5
-    movie = db(db.test_db.movie_id == movie_id).select()
+    movie = db(db.movie_metadata.movie_id == movie_id).select()
     return dict(movie=movie)
 
 
@@ -87,9 +88,7 @@ def user():
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
     # Redirects user to users preference page
-    auth.settings.login_next = URL('default', 'userprefs')
-    # Redirects user to users preference page
-    auth.settings.login_next = URL('default', 'userprefs')
+    auth.settings.login_next = URL('default', 'preferences')
     return dict(form=auth())
 
 
@@ -118,21 +117,20 @@ def directors():
 
 def genres():
     genre = request.args[0]
-    rows = db(db.test_db.genres.contains(genre)).select()
+    rows = db(db.movie_metadata.genres.contains(genre)).select()
     return dict(rows=rows)
 
 
 def popular():
-    rows = db(db.test_db.movie_facebook_likes).select(orderby=~db.test_db.movie_facebook_likes)
+    rows = db(db.movie_metadata.movie_facebook_likes).select(orderby=~db.movie_metadata.movie_facebook_likes)
     return dict(rows=rows)
 
 
 def top():
-    rows = db(db.test_db.imdb_score).select(orderby=~db.test_db.imdb_score)
+    rows = db(db.movie_metadata.imdb_score).select(orderby=~db.movie_metadata.imdb_score)
     return dict(rows=rows)
 
 
 def movies():
-    rows = db().select(db.test_db.ALL, limitby=(0, 100))
+    rows = db().select(db.movie_metadata.ALL, limitby=(0, 100))
     return dict(rows=rows)
-
