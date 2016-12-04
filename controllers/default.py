@@ -45,50 +45,45 @@ def index():
     randm1 = []
     randm2 = []
     for x in range(0, 3):
-        randm1.append(movie_list[random.randint(0, j-1)])
+        randm1.append(movie_list[random.randint(0, j - 1)])
         randm2.append(movie_list[random.randint(0, j - 1)])
-    randt = trl_list[random.randint(0,i-1)]
+    randt = trl_list[random.randint(0, i - 1)]
     print randt
-    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2 = randm2)
+    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2)
 
 
 def userprefs():
     """Suggests movie, add like movie to database, dislike movie to database:
     """
-         def get_num_stars(mv_idx):
-        if not auth.user_id:
-            return None
-        r = db((db.rating.user_id == auth.user_id) & (db.rating.moviedb == mv_idx)).select().first()
-        return None if r is None else r.num_stars
+    return dict()
 
-    movie_list = []
-    j = 0
-    for row in db().select(db.test_db.ALL):
-        movie_list.append(row),
-        j += 1
-    print movie_list
-    return dict(mvrate=movie_list)
 
-    @auth.requires_signature()
+def get_num_stars(mv_idx):
+    if not auth.user_id:
+        return None
+    r = db((db.rating.user_id == auth.user_id) & (db.rating.moviedb == mv_idx)).select().first()
+    return None if r is None else r.num_stars
+
+@auth.requires_signature()
 def vote():
-    mid = int(request.vars.mid) #mid = movie id
+    mid = int(request.vars.mid)  # mid = movie id
     num_stars = int(request.vars.rating)
     db.rating.update_or_insert(
         ((db.rating.moviedb == mid) & (db.rating.user_id == auth.user_id)),
-        moviedb = mid,
-        user_id = auth.user_id,
-        num_stars = num_stars # updates ? num_stars when user enters in their rating
+        moviedb=mid,
+        user_id=auth.user_id,
+        num_stars=num_stars  # updates ? num_stars when user enters in their rating
     )
 
-    r=db(db.rating.moviedb.movie_id).select()
+    r = db(db.rating.moviedb.movie_id).select()
     for row in r:
-        rate=round(row.rating); #average rating with userrating & votecount, see below
-        cnt=row.votecount; # total votecount of all users
+        rate = round(row.rating);  # average rating with userrating & votecount, see below
+        cnt = row.votecount;  # total votecount of all users
 
     # formula to create average rating for movie
     # avg rating = [(orig_star_rating * #of votes)+entered_rate]/(current vote +1)
-    avg=round(((rate*cnt)+num_stars)/(cnt+1), 1);
-    cnt=cnt+1; #
+    avg = round(((rate * cnt) + num_stars) / (cnt + 1), 1);
+    cnt = cnt + 1;  #
     db(db.rating.moviedb.movie_id).update(rating=avg);
     db(db.rating.moviedb.movie_id).update(votecount=cnt);
     return "ok"
@@ -149,6 +144,7 @@ def genres():
 def popular():
     rows = db(db.test_db.movie_facebook_likes).select(orderby=~db.test_db.movie_facebook_likes)
     return dict(rows=rows)
+
 
 def top():
     rows = db(db.test_db.imdb_score).select(orderby=~db.test_db.imdb_score)
