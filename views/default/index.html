@@ -60,11 +60,9 @@
                         <h2> {{=item.movie_title}} ({{=item.title_year}}) </h2>
                         <div class="synopsis">
                             <p>{{=item.synopsis}} </p>
-                            <p class="read-more"><a href="#" class="button">Read More</a></p>
+                            <p class="read-more"><a href={{=item.movie_imdb_link}} class="button">Check out the movie
+                                on IMDb!</a></p>
                         </div>
-                        <a class="btn btn-secondary" href={{=item.movie_imdb_link}} role="button">Check out the
-                            movie on
-                            IMDb!&raquo;</a>
                     </div><!--/span-->
                 {{pass}}
                 </div><!--/row-->
