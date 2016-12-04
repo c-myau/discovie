@@ -246,8 +246,8 @@ def get_movies():
             sublist.append(r.synopsis)
             sublist.append(r.content_rating)
             sublist.append(r.movie_poster_link)
-            sublist.append(r.movie_trailer_link)
             sublist.append(r.movie_imdb_link)
+            sublist.append(r.movie_trailer_link)
 
             movie_list.append(sublist)
 
@@ -261,8 +261,8 @@ def get_movies():
             sublist.append(r.synopsis)
             sublist.append(r.content_rating)
             sublist.append(r.movie_poster_link)
-            sublist.append(r.movie_trailer_link)
             sublist.append(r.movie_imdb_link)
+            sublist.append(r.movie_trailer_link)
 
             movie_list.append(sublist)
             sublist = []

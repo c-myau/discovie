@@ -13,11 +13,12 @@
         <div class="container">
             <div class="row">
                 <h2>Movie Search Box</h2>
-                   <div id="custom-search-input">
+                <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <input v-on:keyup.enter="do_search" class="  search-query form-control" placeholder="Movie Search" v-model="movie_search"/>
+                        <input v-on:keyup.enter="do_search" class="  search-query form-control"
+                               placeholder="Movie Search" v-model="movie_search"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-danger"  v-on:click="do_search" type="button">
+                            <button class="btn btn-danger" v-on:click="do_search" type="button">
                                 <span class=" glyphicon glyphicon-search"></span>
                             </button>
                         </span>
@@ -28,16 +29,17 @@
     </div>
     <div v-for="movie in movie_list" class="container-list">
         <div class="row">
-            <div class="col-xs-10 col-lg-4">
-                <div>
-                    <img v-bind:src="movie[6]" style="max-width:15%;height:auto;"/>
+            <div class="container col-xs-10 ">
+                <div class="quarter">
+                    <img v-bind:src="movie[6]" style="max-width:85%;height:auto;"/>
                 </div>
-                <h4> ${movie[0]}</h4>
-                <p>Director ${movie[1]}</p>
-                <p> IMDB Rating: ${movie[2]}</p>
-                <p>Genre ${movie[3]}</p>
-                <p>${movie[4]}</p>
-                <p>(${movie[5]})</p>
+                <div class="threequarters">
+                    <h3> ${movie[0]} <span>(${movie[5]})</span></h3>
+                    <p>Director ${movie[1]}</p>
+                    <p>IMDB Rating: ${movie[2]}</p>
+                    <p>Genres ${movie[3]}</p>
+                    <p>${movie[4]}</p>
+                </div>
                 <!--/span-->
                 <a class="btn btn-secondary" v-bind:href="movie[7]" role="button">IMDB Link</a>
             </div>
