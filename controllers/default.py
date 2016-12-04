@@ -32,7 +32,7 @@ def index():
     if auth.user_id is not None: ()
     trl_list = []
     i = 0
-    for row in db().select(db.yt_trailers.ALL):
+    for row in db().select(db.trailers_metadata.ALL):
         trl_list.append(row)
         i += 1
     # print i

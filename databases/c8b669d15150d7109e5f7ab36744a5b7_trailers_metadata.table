@@ -1,5 +1,5 @@
 (dp1
-S'youtube_id'
+S'movie_title'
 p2
 (dp3
 S'length'
@@ -10,7 +10,7 @@ p5
 I00
 sS'sortable'
 p6
-I3
+I2
 sS'sql'
 p7
 S'CHAR(512)'
@@ -38,7 +38,7 @@ sg9
 I00
 sg10
 g12
-ssS'name'
+ssS'youtube_id'
 p15
 (dp16
 g4
@@ -46,7 +46,7 @@ I512
 sg5
 I00
 sg6
-I2
+I3
 sg7
 S'CHAR(512)'
 p17

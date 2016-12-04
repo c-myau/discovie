@@ -38,7 +38,12 @@ db.define_table('movie_metadata',
                 Field('num_user_for_reviews', 'string'),
                 Field('num_critic_for_reviews', 'integer'),
                 Field('movie_poster_link', 'string'),
+                Field('movie_trailer_link', 'string'),
                 Field('movie_imdb_link', 'string'))
+
+db.define_table('trailers_metadata',
+                Field('movie_title', 'string', required=True),
+                Field('youtube_id', 'string', required=True))
 
 db.define_table('rating',
                 Field('movie_id', 'integer', required=True),
@@ -56,10 +61,6 @@ db.define_table('watched_list',
 db.define_table('bookmark_list',
                 Field('movie_id', 'integer', required=True),
                 Field('user_id', db.auth_user, default=auth.user_id))
-
-db.define_table('yt_trailers',
-                Field('name', 'string', required=True),
-                Field('youtube_id', 'string', required=True))
 
 
 # after defining tables, uncomment below to enable auditing
