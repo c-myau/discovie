@@ -47,20 +47,20 @@ db.define_table('trailer_metadata',
 
 db.define_table('rating',
                 Field('movie_id', 'integer', required=True),
-                Field('user_id', db.auth_user, default=auth.user_id),
+                Field('user_id', 'integer', required=True),
                 Field('stars', 'integer'))
 
 db.define_table('suggestion_list',
                 Field('movie_id', 'integer', required=True),
-                Field('user_id', db.auth_user, default=auth.user_id))
+                Field('user_id', 'integer', required=True))
 
 db.define_table('watched_list',
                 Field('movie_id', 'integer', required=True),
-                Field('user_id', db.auth_user, default=auth.user_id))
+                Field('user_id', 'integer', required=True))
 
 db.define_table('bookmark_list',
                 Field('movie_id', 'integer', required=True),
-                Field('user_id', db.auth_user, default=auth.user_id))
+                Field('user_id', 'integer', required=True))
 
 
 # after defining tables, uncomment below to enable auditing
