@@ -1,175 +1,67 @@
 {{extend 'layout.html'}}
 
-{{block head}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
-    var get_info_url = "{{=URL('default', 'get_info')}}";
-    var vote_url = "{{= URL('default', 'vote', user_signature=True) if auth.user_id else ''}}";
+    var get_info_url = "{{=URL('ratings', 'get_info')}}";
+    var vote_url = "{{= URL('ratings', 'vote', user_signature=True) if auth.user_id else ''}}";
     var is_logged_in = "{{='true' if auth.user_id else 'false'}}";
 </script>
+</head>
 
-<script>
-    jQuery('input.rating').each(function(){
-        var span = jQuery('<span style="white-space:nowrap" />');
-        var self = jQuery(this).hide().after(span);
-        var fill_stars = function() {
-            var k = parseInt(self.val()) || 0;
-            for(var i=1; i<6; i++) span.find('.rate'+i).html((i<=k)?'&#x2605;':'&#x2606;');
-        };
-        for(var k=1; k<6; k++) (function(k){
-            span.append('<span class="rate'+k+'">&#x2606;</span>');
-            span.find('.rate'+k).mouseover(function(){
-                for(var i=1; i<6; i++) span.find('.rate'+i).html((i<=k)?'&#x2605;':'&#x2606;');
-            }).click(function(){
-                self.val(k); // for an input node n, n.val() returns the value, n.val(x) sets value to x
-                fill_stars();
-                jQuery.post(
-                    '{{=URL('vote', user_signature=True)}}', // URL for the AJAX call
-                    {   // Dictionary of names to values. The server will have:
-                        'mid':self.attr('mid'),  // request.vars.picid
-                        'rating':k   // request.vars.rating
-                    }
-                );
-            });
-        })(k); // To ensure k is properly bound inside the event listener.
-        span.mouseout(fill_stars);  // To make sure we show the correct n of stars, even if we moved
-                                    // the mouse after clicking.
-        fill_stars();
-    });
-</script>
-
-<script>
-    function func()
-    {
-
-    }
-function myFunction() {
-    var x = document.getElementsByName("rating-input-1");
-
-    for(var j=0;j<x.length;j++)
-            if(x[j].checked){
-              // alert(x[j].value);
-             //   alert(y);
-                document.getElementById("hiddn").value = x[j].value;
-              // alert(document.getElementById("hiddn").value);
-//                 return x[j].value;
-            }
-}
-
-
-</script>
-
-{{end}}
 
 <div class="main_content">
     <div class="user-preference-top">
         <!--To get back home -->
         <a href="{{=URL('index')}}">
-            <img src="../static/images/dislogo.png" alt="Discovie Logo">
+            <img src="../../static/images/dislogo.png" alt="Discovie Logo">
         </a>
-                   <!-- Login -->
+        <!-- Login -->
         <div class="user-pref-login">
             <a href="{{=URL('default', 'index')}}" class="btn btn-success">
-                    <i class="fa fa-map-pin" aria-hidden="true"></i> Home</a>
-            {{if auth.user_id:}}
-                <a href="{{=URL('default', 'user', args=['logout'])}}" class="btn btn-danger">
-                    <i class="fa fa-times" aria-hidden="true"></i> Logout</a>
-                {{else:}}
-                <a href="{{=URL('default', 'user', args=['login'])}}" class="btn btn-warning">
-                    <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
-            {{pass}}
+                <i class="fa fa-map-pin" aria-hidden="true"></i> Home</a>
+        {{if auth.user_id:}}
+            <a href="{{=URL('default', 'user', args=['logout'])}}" class="btn btn-danger">
+                <i class="fa fa-times" aria-hidden="true"></i> Logout</a>
+        {{else:}}
+            <a href="{{=URL('default', 'user', args=['login'])}}" class="btn btn-warning">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+        {{pass}}
         </div>
     </div>
     </br></br>
 
     <div>
-            <h1 class="main_title text-center">User Preferences</h1>
-            <p class="explanation text-center">This page will help you create a movie preference!</p>
-    </div>
-    <div id="vue-div"  class="display:none">
-        <div v-if="logged_in">
-            <button v-if="!is_adding_post" class="btn btn-danger" v-on:click="add_post_button()">
-                <i class="fa fa-plus"></i>&nbsp;&nbsp;Add new movie
-            </button>
-            We might not do anything with this yet. I'm going to leave the creating post thing here for now.
-            <button v-if="is_adding_post" class="btn btn-warning btn-sm" v-on:click="cancel_post_button()">
-                <i class="fa fa-times-circle-o"></i>&nbsp;&nbsp;Cancel
-            </button>
-        </div>
-        <div v-if="is_adding_post" id="add-new-post">
-            <form action="#" v-on:submit.prevent="add_post" enctype="multipart/form-data" method="post">
-                <div id="postText">
-                    <textarea v-model="form_post_content" placeholder="Type in your post here." type="text" />
-                    </textarea>
-                </div>
-                <div>
-                    <input class="btn btn-primary fa" id="add_post_submit" type="submit" value="&#xf0c7;  Post" />
-                </div>
-            </form>
-        </div>
-        <!-- Posts List -->
-        <template v-for="post in posts" class="post_list post_listing">
-            <!--<div v-if="!edit_status[post.id]">-->
-            <div>
-                <p id="post" class="post-content">
-                    ${post.post_content}
-                </p>
-                <textarea class="form-control" id="textarea"  v-model="post.post_content" style="display: none;">${post.post_content}</textarea>
-            </div>
-            <div id="delEdit" v-if="post.user_email == user_email">
-                <button class="btn btn-info" id="editBtn" onclick="hideEditBtn(this)">
-                    <i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit
-                </button>
-
-                <button class="btn btn-info" id="saveBtn" onclick="hidePostBtn(this);" v-on:click="save_post(post.post_content, post.id, post)" style="display: none">
-                    <i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;Post
-                </button>
-                <button class="btn btn-danger" id="cancelBtn" onclick="hideCancelBtn(this);" v-on:click="cancel_post(post, post.temp)" style="display: none">
-                    <i class="fa fa-times-circle-o"></i>&nbsp;&nbsp;Cancel
-                </button>
-            </div>
-            <div id="delEdit" v-if="post.user_email == user_email">
-                <button class="btn btn-danger" v-on:click="delete_post(post.id)">
-                    <i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete
-                </button>
-            </div>
-            <div id="postInfo">
-                <h5>
-                    <b>Name:</b> ${post.user_name}
-                    <b>Created On:</b> ${post.created_on}
-                </h5>
-            </div>
-            <div id="postInfo">
-                <h5 v-if="post.created_on != post.updated_on">
-                    <b>Updated On:</b> ${post.updated_on}
-                </h5>
-            </div>
-        </template>
-        <br /> <br/>
-        <div id="load-more" v-if="has_more">
-            <button class="btn btn-default" v-on:click="get_more()">
-                Load More
-            </button>
-        </div>
+        <h1 class="main_title text-center">User Preferences</h1>
+        <p class="explanation text-center">This page will help you create a movie preference!</p>
     </div>
 </div>
 
- <div class="container" id="catalog">
+<div class="container" id="catalog">
+    <div id="movies_catalog">
+    {{for mv in rows:}}
+        <div class="col-xs-3" style=" width: 185px; height: 278px;">
+            <a href="{{=mv.movie_imdb_link}}"><img src="{{=mv.poster_url}}" width="185" height="278">{{=mv.movie_title}}
+            </a>
+            <div>
+                <span v-on:mouseout="mouse_out(img._idx)">
+                    <span v-on:mouseover="mouse_over(img._idx, idx)"
+                          v-on:click="set_stars(img._idx, idx)"
+                          v-for="idx in star_indices">
+                        <i v-if="idx <= img.num_stars_display" class="fa fa-star"></i>
+                        <i v-if="idx > img.num_stars_display" class="fa fa-star-o"></i>
+                    </span>
+                    <i v-if="img._pending" class="fa fa-spinner fa-spin"></i>
+                </span>
+            </div>
+        </div>
+    {{pass}}
+    </div>
+</div>
 
-                <div id="movies_catalog">
-                {{for mv in mvrate:}}
-                <div class="col-xs-3" style=" width: 185px; height: 278px;">
-                        <a href="{{=mv.movie_imdb_link}}"><img src="{{=mv.poster_url}}" width="185" height="278">{{=mv.movie_title}}</a>
-                    <div>
-                        {{if auth.user:}}
-                            <input class="form-control rating" value="{{=mv['num_stars']}}" mid="{{=mv['moviedb']}}"/>
-                        {{pass}}
-                        </div>
-                    </div>
-                {{pass}}
-                    </div>
-     </div>
-
-<br />
+<br/>
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
