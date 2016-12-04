@@ -48,7 +48,7 @@ db.define_table('trailers_metadata',
 db.define_table('rating',
                 Field('movie_id', 'integer', required=True),
                 Field('user_id', db.auth_user, default=auth.user_id),
-                Field('num_stars', 'integer'))
+                Field('stars', 'integer'))
 
 db.define_table('suggestion_list',
                 Field('movie_id', 'integer', required=True),

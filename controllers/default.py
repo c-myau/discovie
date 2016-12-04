@@ -119,15 +119,15 @@ def genres():
 
 
 def popular():
-    rows = db(db.movie_metadata.movie_facebook_likes).select(orderby=~db.movie_metadata.movie_facebook_likes)
+    rows = db(db.movie_metadata.movie_facebook_likes).select(limitby=(0, 25), orderby=~db.movie_metadata.movie_facebook_likes)
     return dict(rows=rows)
 
 
 def top():
-    rows = db(db.movie_metadata.imdb_score).select(orderby=~db.movie_metadata.imdb_score)
+    rows = db(db.movie_metadata.imdb_score).select(limitby=(0, 25), orderby=~db.movie_metadata.imdb_score)
     return dict(rows=rows)
 
 
 def movies():
-    rows = db().select(db.movie_metadata.ALL, limitby=(0, 100))
+    rows = db().select(db.movie_metadata.ALL, limitby=(0, 25))
     return dict(rows=rows)
