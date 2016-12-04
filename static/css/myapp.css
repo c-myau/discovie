@@ -186,7 +186,7 @@
 }
 
 .synopsis {
-  max-height: 120px;
+  max-height: 320px;
   position: relative;
   overflow: hidden;
 }
