@@ -13,20 +13,11 @@ import random
 stoplist = [
     "",
     "The", "the",
-    "is", "an"
+    "is", "an",
     "to", "at",
     "of", "in",
     "and",
 ]
-
-def get_user_name_from_email(email):
-    """Returns a string corresponding to the user first and last names,
-    given the user email."""
-    u = db(db.auth_user.email == email).select().first()
-    if u is None:
-        return 'None'
-    else:
-        return ' '.join([u.first_name, u.last_name])
 
 
 def index():
@@ -40,14 +31,12 @@ def index():
     if auth.user_id is not None: ()
     trl_list = []
     i = 0
-    for row in db().select(db.yt_trailers.ALL):
+    for row in db().select(db.trailers_metadata.ALL, limitby=(0, 50)):
         trl_list.append(row)
         i += 1
-    # print i
-    # print trl_list
     movie_list = []
     j = 0
-    for row in db().select(db.test_db.ALL):
+    for row in db().select(db.movie_metadata.ALL):
         movie_list.append(row)
         j += 1
     randm1 = []
@@ -58,23 +47,23 @@ def index():
         randm2.append(movie_list[random.randint(0, j - 1)])
         randm3.append(movie_list[random.randint(0, j - 1)])
     randt = trl_list[random.randint(0, i - 1)]
-    # print randt
-    genres = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
-               'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
-               'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
-    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3, genres=genres)
+    genre = ['Action', 'Adventure', 'Fantasy', 'Sci-Fi', 'Thriller', 'Documentary', 'Romance', 'Animation', 'Comedy',
+             'Family', 'Musical', 'Mystery', 'Western', 'Drama', 'History', 'Sport', 'Crime', 'Horror', 'War',
+             'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
+    return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3, genres=genre)
 
 
-def userprefs():
-    """Suggests movie, add like movie to database, dislike movie to database:
+def preferences():
     """
-    rows = db().select(db.test_db.ALL, limitby=(0, 100))
+    Suggests movie, add like movie to database, dislike movie to database:
+    """
+    rows = db().select(db.movie_metadata.ALL, limitby=(0, 25))
     return dict(rows=rows)
 
 
-def movie_page():
+def page():
     movie_id = 5
-    movie = db(db.test_db.movie_id == movie_id).select()
+    movie = db(db.movie_metadata.movie_id == movie_id).select()
     return dict(movie=movie)
 
 
@@ -95,9 +84,7 @@ def user():
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
     # Redirects user to users preference page
-    auth.settings.login_next = URL('default', 'userprefs')
-    # Redirects user to users preference page
-    auth.settings.login_next = URL('default', 'userprefs')
+    auth.settings.login_next = URL('default', 'preferences')
     return dict(form=auth())
 
 
@@ -126,29 +113,30 @@ def directors():
 
 def genres():
     genre = request.args[0]
-    rows = db(db.test_db.genres.contains(genre)).select()
+    rows = db(db.movie_metadata.genres.contains(genre)).select(limitby=(0, 25))
     return dict(rows=rows)
 
 
 def popular():
-    rows = db(db.test_db.movie_facebook_likes).select(orderby=~db.test_db.movie_facebook_likes)
+    rows = db(db.movie_metadata.movie_facebook_likes).select(limitby=(0, 25),
+                                                             orderby=~db.movie_metadata.movie_facebook_likes)
     return dict(rows=rows)
 
 
 def top():
-    rows = db(db.test_db.imdb_score).select(orderby=~db.test_db.imdb_score)
+    rows = db(db.movie_metadata.imdb_score).select(limitby=(0, 25), orderby=~db.movie_metadata.imdb_score)
     return dict(rows=rows)
 
 
 def get_movies():
     search_string = request.vars.q.strip()
-    rows = db().select(db.test_db.ALL, limitby=(0, 100))
+    rows = db().select(db.movie_metadata.ALL)
     movie_list = []
     sublist = []
     title_list = []
     original_list = []
 
-    #Starting algorithm, start by finding all words with a size greater than 2
+    # Starting algorithm, start by finding all words with a size greater than 2
     for r in rows:
         append_list = re.findall(r'[A-z0-9][A-z0-9]+', r.movie_title)
         if len(append_list):
@@ -158,23 +146,23 @@ def get_movies():
     i = 0
     removal = 0
 
-    #each title in the title is another title
+    # each title in the title is another title
     for title in title_list:
         k = 0
 
-        #this code changes all words to lower case if not already, makes the word non-plural. No I can't actually
-        #tell if it's plural, but as long as I apply the same technique to incoming search terms the result is the same
+        # this code changes all words to lower case if not already, makes the word non-plural. No I can't actually
+        # tell if it's plural, but as long as I apply the same technique to incoming search terms the result is the same
         for word in title:
             title[k] = word.lower()
             if title[k][-1] == 's' and title[k][-2] != 's':
                 title[k] = title[k][:-1]
-            k+=1
+            k += 1
 
         s_word = 0
         removal = 0
 
-        #This code removes useless words that can't be used as keywords. The funny stuff with the while loop is because
-        #of the array removal causing shenanagins
+        # This code removes useless words that can't be used as keywords. The funny stuff with the while loop is because
+        # of the array removal causing shenanagins
         while s_word < len(title):
             for stop_word in stoplist:
                 if title[s_word] == stop_word:
@@ -185,14 +173,13 @@ def get_movies():
             else:
                 s_word += 1
 
-
-    #This code starts both the query parsing as well as the scoring algorithm
-    #good shit right here
+    # This code starts both the query parsing as well as the scoring algorithm
+    # good shit right here
     if request.vars.q.strip():
         high_list = []
         high_original = []
 
-        #parse the search terms using the same methods as the titles to ensure compaitbility
+        # parse the search terms using the same methods as the titles to ensure compaitbility
         search_list = [x for x in re.findall(r'[A-z0-9][A-z0-9]+', request.vars.q)]
 
         i = 0
@@ -230,9 +217,9 @@ def get_movies():
             #              2 x [# of searched words]      2 x [# of words in movie title]
             search_score = float(search_match) / (len(search_list) * 2) + float(search_match) / (len(list) * 2)
 
-            #Scorekeeping
+            # Scorekeeping
             if search_score > highest_score:
-                #print(original_list[index])
+                # print(original_list[index])
                 sublist = []
                 sublist.append(original_list[index])
                 sublist.append(search_score)
@@ -241,38 +228,38 @@ def get_movies():
 
                 highest_score = search_score
             elif search_score > 0.3:
-                #print(original_list[index])
+                # print(original_list[index])
                 sublist = []
                 sublist.append(original_list[index])
                 sublist.append(search_score)
                 high_original.append(sublist)
             sublist = []
             index += 1
-            #end for loop
+            # end for loop
         for item in high_original:
             sublist = []
-            r = db(db.test_db.movie_title == item[0]).select().first()
+            r = db(db.movie_metadata.movie_title == item[0]).select().first()
             sublist.append(r.movie_title)
             sublist.append(r.director_name)
             sublist.append(r.imdb_score)
             sublist.append(r.genres)
             sublist.append(r.synopsis)
             sublist.append(r.content_rating)
-            sublist.append(r.poster_url)
+            sublist.append(r.movie_poster_link)
             sublist.append(r.movie_imdb_link)
 
             movie_list.append(sublist)
 
     else:
         for r in rows:
-            #append items to the list of lists of lists of lists of lists of lists
+            # append items to the list of lists of lists of lists of lists of lists
             sublist.append(r.movie_title)
             sublist.append(r.director_name)
             sublist.append(r.imdb_score)
             sublist.append(r.genres)
             sublist.append(r.synopsis)
             sublist.append(r.content_rating)
-            sublist.append(r.poster_url)
+            sublist.append(r.movie_poster_link)
             sublist.append(r.movie_imdb_link)
 
             movie_list.append(sublist)
@@ -280,6 +267,6 @@ def get_movies():
 
     return response.json(dict(movie_list=movie_list))
 
+
 def movies():
     return dict()
-

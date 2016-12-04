@@ -6,8 +6,8 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 response.logo = A(B('DISC', SPAN('ovie')), XML('&trade;&nbsp;'),
-                  _class="navbar-brand", _href="http://www.web2py.com/",
-                  _id="web2py-logo")
+                  _class="navbar-brand", _href=URL('default', 'index'),
+                  _id="discovie-logo")
 response.title = request.application.replace('_', ' ').title()
 response.subtitle = ''
 

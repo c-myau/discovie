@@ -1,0 +1,18 @@
+{{extend 'layout.html'}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+{{for item in movie:}}
+<div class="container-list">
+    <div class="row">
+        <div>
+            <div> {{=item.synopsis}}</div>
+        </div><!--/span-->
+    </div><!--/row-->
+</div><!--/span-->
+{{pass}}
+</body>
+</html>
