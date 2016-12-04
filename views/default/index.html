@@ -41,12 +41,29 @@
             </div><!--/CL-->
             <div class="container-list">
                 <div class="row">
-                {{for item in ranm:}}
+                {{for item in ranm1:}}
                     <div class="col-xs-6 col-lg-4">
                         <img src={{=item.poster_url}} alt="singstreet" style="max-width:100%;height:auto;"
                              srcset={{=item.poster_url}} 300w, {{=item.poster_url}} 547w"
                         sizes="(max-width: 547px) 100vw, 547px">
-                        <h2 class="fix"> {{=item.movie_title}} ({{=item.title_year}}) </h2>
+                        <h2> {{=item.movie_title}} ({{=item.title_year}}) </h2>
+                        <div class="synopsis">
+                            <p>{{=item.synopsis}} </p>
+                            <p class="read-more"><a href="#" class="button">Read More</a></p>
+                        </div>
+                        <a class="btn btn-secondary" href={{=item.movie_imdb_link}} role="button">Check out the
+                            movie on
+                            IMDb!&raquo;</a>
+                    </div><!--/span-->
+                {{pass}}
+                </div><!--/row-->
+                <div class="row">
+                {{for item in ranm2:}}
+                    <div class="col-xs-6 col-lg-4">
+                        <img src={{=item.poster_url}} alt="singstreet" style="max-width:100%;height:auto;"
+                             srcset={{=item.poster_url}} 300w, {{=item.poster_url}} 547w"
+                        sizes="(max-width: 547px) 100vw, 547px">
+                        <h2> {{=item.movie_title}} ({{=item.title_year}}) </h2>
                         <div class="synopsis">
                             <p>{{=item.synopsis}} </p>
                             <p class="read-more"><a href="#" class="button">Read More</a></p>
