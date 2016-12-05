@@ -61,9 +61,36 @@ def preferences():
 
 
 def page():
+    x = request.vars.keyword
+    print(x)
     movie_id = 5
     movie = db(db.movie_metadata.movie_id == movie_id).select()
     return dict(movie=movie)
+
+
+def post():
+    search = request.vars.key_terms
+    key = search.split()
+    rows = db(db.movie_metadata.movie_title.contains(key) or
+             db.movie_metadata.director_name.contains(key) or
+             db.movie_metadata.title_year.contains(key) or
+             db.movie_metadata.content_rating.contains(key) or
+             db.movie_metadata.imdb_score.contains(key) or
+             db.movie_metadata.genres.contains(key) or
+             db.movie_metadata.plot_keywords.contains(key) or
+             db.movie_metadata.synopsis.contains(key) or
+             db.movie_metadata.color.contains(key) or
+             db.movie_metadata.country.contains(key) or
+             db.movie_metadata.movie_language.contains(key) or
+             db.movie_metadata.actor_1_name.contains(key) or
+             db.movie_metadata.actor_2_name.contains(key) or
+             db.movie_metadata.actor_3_name.contains(key) or
+             db.movie_metadata.plot_keywords.contains(key) or
+             db.movie_metadata.synopsis.contains(key)).select()
+    print(rows)
+    return dict(rows=rows)
+
+
 
 
 def user():
@@ -270,4 +297,7 @@ def get_movies():
     return response.json(dict(movie_list=movie_list))
 
 def movies():
+    return dict()
+
+def query():
     return dict()

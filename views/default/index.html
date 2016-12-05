@@ -85,17 +85,17 @@
                 {{pass}}
                 </div>
             </div>
-                        
-            <!-- SEARCH BOX CODE BEGINS -->
 
-            <div class="container-search">
+            <!-- SEARCH BOX CODE BEGINS -->
+            <div class="container-list">
                 <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control" style="height: 70px"  placeholder="Search" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                    <div class="search_div">
+                        <form id="search" action="{{=URL('discovie','default', 'post')}}" method="get">
+                            <input name="key_terms" type="search" placeholder="Search...">
+                            <button class="btn"><i class="fa fa-search fa-sm"></i></button>
+                        </form>
+
+                    </div>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
             {{for item in ranm3:}}
                 <a class="list-group-item" href={{=item.movie_imdb_link}}>
                     <img height=50 width=50 src={{=item.movie_poster_link}}>
-                {{=item.movie_title}} ({{=item.title_year}})</a>
+                {{=item.movie_title}}</a>
             {{pass}}
             </div>
 
