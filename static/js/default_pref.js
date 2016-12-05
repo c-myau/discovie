@@ -36,28 +36,28 @@ var app = function () {
         });
     };
 
-    self.mouse_over = function (img_idx, star_idx) {
-        self.vue.movie_list[img_idx].num_stars_display = star_idx;
+    self.mouse_over = function (movie_idx, star_idx) {
+        self.vue.movie_list[movie_idx].num_stars_display = star_idx;
     };
 
-    self.mouse_out = function (img_idx) {
-        self.vue.movie_list[img_idx].num_stars_display = self.vue.movie_list[img_idx].num_stars;
+    self.mouse_out = function (movie_idx) {
+        self.vue.movie_list[movie_idx].num_stars_display = self.vue.movie_list[movie_idx].num_stars;
     };
 
-    self.set_stars = function (img_idx, star_idx) {
-        var img = self.vue.movie_list[img_idx];
-        img.num_stars = star_idx;
-        img._pending = true;
-        self.vue.$set(self.vue.movie_list, img_idx, img);
+    self.set_stars = function (movie_idx, star_idx) {
+        var movie = self.vue.movie_list[movie_idx];
+        movie.num_stars = star_idx;
+        movie._pending = true;
+        self.vue.$set(self.vue.movie_list, movie_idx, movie);
         $.post(vote_url,
             {
-                image_id: img.id,
+                movie_id: movie.id,
                 num_stars: star_idx
             },
             function () {
-                img = self.vue.movie_list[img_idx];
-                img._pending = false;
-                self.vue.$set(self.vue.movie_list, img_idx, img);
+                movie = self.vue.movie_list[movie_idx];
+                movie._pending = false;
+                self.vue.$set(self.vue.movie_list, movie_idx, movie);
             }
         )
     };

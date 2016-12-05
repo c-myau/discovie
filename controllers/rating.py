@@ -39,13 +39,13 @@ def get_info():
 
 @auth.requires_signature()
 def vote():
-    picid = int(request.vars.image_id)
+    movie_id = int(request.vars.movie_id)
     num_stars = int(request.vars.num_stars)
     db.rating.update_or_insert(
-        ((db.rating.image_id == picid) & (db.rating.user_id == auth.user_id)),
-        image_id=picid,
+        ((db.rating.movie_id == movie_id) & (db.rating.user_id == auth.user_id)),
+        movie_id=movie_id,
         user_id=auth.user_id,
-        num_stars=num_stars
+        stars=num_stars
     )
     time.sleep(0.5)  # To make testing easier.
     return "ok"
