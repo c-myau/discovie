@@ -13,10 +13,7 @@
 
 <div class="main_content">
     <div class="user-preference-top">
-        <!--To get back home -->
-        <a href="{{=URL('index')}}">
-            <img src="../static/images/dislogo.png" alt="Discovie Logo">
-        </a>
+
         <!-- Login -->
         <div class="user-pref-login">
             <a href="{{=URL('default', 'index')}}" class="btn btn-success">
@@ -31,17 +28,15 @@
         </div>
     </div>
 
-    <div class="container-sidebar">
-        <h1 class="main_title text-center">User Preferences</h1>
-        <p class="explanation text-center">This page will help you create a movie preference!</p>
-    </div>
+        <h1 class="main_title text-center" style="color: white; padding-left: 150px">User Preferences</h1>
+        <p class="explanation text-center" style="color: white">This page will help you create a movie preference!</p>
 </div>
 
 <!-- Posters -->
 
 <!-- His code -->
 <div class="main_content">
-    <div id="vue-div" class="display:none">
+    <div id="vue-div" class="display:none" style="padding-left: 30px">
         <div v-for="movie in movie_list" class="container-list" style="display:inline-block; margin:10px;">
             <div class="row">
                 <div class="container col-xs-10">
