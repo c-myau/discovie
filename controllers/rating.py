@@ -18,10 +18,10 @@ def index():
 def get_info():
     rows = db().select(db.movie_metadata.ALL, limitby=(0, 9))
 
-    def get_num_stars(img_idx):
+    def get_num_stars(movie_idx):
         if not auth.user_id:
             return None
-        r = db((db.rating.user_id == auth.user_id) & (db.rating.movie_id == img_idx)).select().first()
+        r = db((db.rating.user_id == auth.user_id) & (db.rating.movie_id == movie_idx)).select().first()
         return 0 if r is None else r.stars
 
     movie_list = []
