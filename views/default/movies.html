@@ -30,16 +30,12 @@
     <div v-for="movie in movie_list" class="container-list">
         <div class="row">
             <div class="container col-xs-10">
-                <div class="quarter">
-                    <img v-bind:src="movie[6]" style="max-width:100%;height:auto;"/>
-                </div>
-                <div class="threequarters">
+                    <img v-bind:src="movie[6]" style="max-width:25%;height:auto;"/>
                     <h3> ${movie[0]} <span>(${movie[5]})</span></h3>
                     <p>Director ${movie[1]}</p>
                     <p>IMDB Rating: ${movie[2]}</p>
                     <p>Genres ${movie[3]}</p>
                     <p>${movie[4]}</p>
-                </div>
                 <!--/span-->
                 <a class="btn btn-secondary" v-bind:href="movie[7]" role="button">IMDB Link</a>
             </div>
