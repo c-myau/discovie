@@ -16,7 +16,7 @@ def index():
 
 
 def get_info():
-    rows = db().select(db.movie_metadata.ALL, limitby=(0, 9))
+    rows = db().select(db.movie_metadata.ALL, orderby='<random>', limitby=(0, 8))
 
     def get_num_stars(movie_idx):
         if not auth.user_id:

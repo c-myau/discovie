@@ -30,12 +30,12 @@ def index():
     if auth.user_id is not None: ()
     trl_list = []
     i = 0
-    for row in db().select(db.trailer_metadata.ALL, limitby=(0, 50)):
+    for row in db().select(db.trailer_metadata.ALL, orderby='<random>', limitby=(0, 30)):
         trl_list.append(row)
         i += 1
     movie_list = []
     j = 0
-    for row in db().select(db.movie_metadata.ALL):
+    for row in db().select(db.movie_metadata.ALL, orderby='<random>', limitby=(0, 30)):
         movie_list.append(row)
         j += 1
     randm1 = []
@@ -56,7 +56,7 @@ def preferences():
     """
     Suggests movie, add like movie to database, dislike movie to database:
     """
-    rows = db().select(db.movie_metadata.ALL, limitby=(0, 25))
+    rows = db().select(db.movie_metadata.ALL, orderby='<random>', limitby=(0, 25))
     return dict(rows=rows)
 
 
