@@ -24,10 +24,12 @@ def get_info():
 
     movie_list = []
     for i, movie in enumerate(rows):
+        print(i)
+        print(movie.movie_poster_link)
         n = get_num_stars(i)
-        print(movie)
+        print(type(movie))
         movie_list.append(dict(
-            url=movie,
+            url=movie.movie_poster_link,
             num_stars=n,
             num_stars_display=n,  # To facilitate vue
             id=i,
