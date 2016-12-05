@@ -61,11 +61,9 @@ def preferences():
 
 
 def page():
-    x = request.vars.keyword
-    print(x)
-    movie_id = 5
-    movie = db(db.movie_metadata.movie_id == movie_id).select()
-    return dict(movie=movie)
+    key = request.args[0]
+    movie = db(db.movie_metadata.movie_id == key).select()
+    return dict(rows=movie)
 
 
 def post():
@@ -87,7 +85,6 @@ def post():
              db.movie_metadata.actor_3_name.contains(key) or
              db.movie_metadata.plot_keywords.contains(key) or
              db.movie_metadata.synopsis.contains(key)).select()
-    print(rows)
     return dict(rows=rows)
 
 
