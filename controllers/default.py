@@ -51,7 +51,7 @@ def index():
              'Biography', 'Music', 'Game-Show', 'Reality-TV', 'News', 'Short', 'Film-Noir']
     return dict(trl=trl_list, rant=randt, ranm1=randm1, ranm2=randm2, ranm3=randm3, genres=genre)
 
-
+@auth.requires_login()
 def preferences():
     """
     Suggests movie, add like movie to database, dislike movie to database:
@@ -86,7 +86,6 @@ def post():
              db.movie_metadata.plot_keywords.contains(key) or
              db.movie_metadata.synopsis.contains(key)).select()
     return dict(rows=rows)
-
 
 
 

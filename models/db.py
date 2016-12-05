@@ -18,10 +18,10 @@ myconf = AppConfig(reload=True)
 
 if not request.env.web2py_runtime_gae:
     # if NOT running on Google App Engine use SQLite or other DB
-    # db = DAL(myconf.get('db.uri'),
-    #          pool_size=myconf.get('db.pool_size'),
-    #          migrate_enabled=myconf.get('db.migrate'),
-    #          check_reserved=['all'])
+    db = DAL(myconf.get('db.uri'),
+             pool_size=myconf.get('db.pool_size'),
+             migrate_enabled=myconf.get('db.migrate'),
+             check_reserved=['all'])
 
     # local sandbox database
     # db = DAL('mysql://discovie:discovie@localhost/production',
@@ -29,10 +29,10 @@ if not request.env.web2py_runtime_gae:
     #          check_reserved=['all'])
 
     # pythonanywhere production database
-    db = DAL('mysql://discovie:asdf1234@discovie.mysql.pythonanywhere-services.com/discovie$test_db',
-             pool_size=1,
-             check_reserved=['all'],
-             fake_migrate_all=True)
+    # db = DAL('mysql://discovie:asdf1234@discovie.mysql.pythonanywhere-services.com/discovie$test_db',
+    #          pool_size=1,
+    #          check_reserved=['all'],
+    #          fake_migrate_all=True)
 
     # I like to keep the session in the db.
     session.connect(request, response, db=db)
