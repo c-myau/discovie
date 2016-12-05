@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <script src="{{=URL('static', 'js/vue.js')}}"></script>
     <script>
-        var get_info_url = "{{=URL('api', 'get_info')}}";
-        var vote_url = "{{= URL('api', 'vote', user_signature=True) if auth.user_id else ''}}";
-        var is_logged_in = "{{='true' if auth.user_id else 'false'}}";
+        var get_info_url = "{{=URL('rating', 'get_info')}}";
+        var vote_url = "{{= URL('rating', 'vote', user_signature=True) if auth.user_id else ''}}";
+        var is_logged_in = {{='true' if auth.user_id else 'false'}};
     </script>
 </head>
 
@@ -40,32 +39,11 @@
 </div>
 
 <!-- Posters -->
-<div class="container" id="catalog">
-    <div id="movies_catalog">
-    {{for mv in rows:}}
-        <div class="col-xs-3" style=" width: 185px; height: 278px;">
-            <a href="{{=mv.movie_imdb_link}}"><img src="{{=mv.movie_poster_link}}" width="185"
-                                                   height="278">{{=mv.movie_title}}</a>
-            <div id="vue-div" class="display:none">
-                <span v-on:mouseout="mouse_out(img._idx)">
-                    <span v-on:mouseover="mouse_over(img._idx, idx)"
-                          v-on:click="set_stars(img._idx, idx)"
-                          v-for="idx in star_indices">
-                        <i v-if="idx <= img.num_stars_display" class="fa fa-star"></i>
-                        <i v-if="idx > img.num_stars_display" class="fa fa-star-o"></i>
-                    </span>
-                    <i v-if="img._pending" class="fa fa-spinner fa-spin"></i>
-                </span>
-            </div>
-        </div>
-    {{pass}}
-    </div>
-</div>
 
 <!-- His code -->
 <div class="main_content">
     <div id="vue-div" class="display:none">
-        <div v-for="img in image_list" style="display:inline-block; margin:10px;">
+        <div v-for="img in movie_list" style="display:inline-block; margin:10px;">
             <img v-bind:src="img.url" style="height:200px"/>
             <div v-if="is_logged_in">
                 <span v-on:mouseout="mouse_out(img._idx)">
@@ -84,4 +62,4 @@
 
 <br/>
 
-<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+<script src="{{=URL('static', 'js/default_pref.js')}}"></script>
