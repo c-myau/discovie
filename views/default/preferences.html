@@ -30,9 +30,8 @@
         {{pass}}
         </div>
     </div>
-    </br></br>
 
-    <div>
+    <div class="container-sidebar">
         <h1 class="main_title text-center">User Preferences</h1>
         <p class="explanation text-center">This page will help you create a movie preference!</p>
     </div>
@@ -47,6 +46,7 @@
             <div class="row">
                 <div class="container col-xs-10">
                     <img v-bind:src="movie.url" style="height:500px"/>
+                    <h5>${movie.title}</h5>
                     <div v-if="is_logged_in">
                 <span v-on:mouseout="mouse_out(movie._idx)">
                     <span v-on:mouseover="mouse_over(movie._idx, idx)"

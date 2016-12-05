@@ -10,12 +10,14 @@
 
 import time
 
+
 def index():
     return dict()
 
 
 def get_info():
-    rows = db().select(db.movie_metadata.ALL, limitby=(0, 10))
+    rows = db().select(db.movie_metadata.ALL, limitby=(0, 9))
+
     def get_num_stars(img_idx):
         if not auth.user_id:
             return None
@@ -24,12 +26,10 @@ def get_info():
 
     movie_list = []
     for i, movie in enumerate(rows):
-        print(i)
-        print(movie.movie_poster_link)
         n = get_num_stars(i)
-        print(type(movie))
         movie_list.append(dict(
             url=movie.movie_poster_link,
+            title=movie.movie_title,
             num_stars=n,
             num_stars_display=n,  # To facilitate vue
             id=i,
