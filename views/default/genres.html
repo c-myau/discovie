@@ -36,7 +36,12 @@
             <div>
                 <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
                 <a href={{=URL('discovie', 'default', 'page', args=[item.movie_id])}}>{{=item.movie_title}}</a><br/><br/>
-                <p><b>Directed By {{=item.director_name}}</b></p>
+                <p><b>Directed By: </b>{{=item.director_name}}
+                    <b>Movie's budget: </b>{{=item.budget}}
+                    <b>IMDB Score: </b>{{=item.imdb_score}}</p>
+                <p>
+                    <b>Actors' name(s): </b> {{=item.actor_1_name}} {{=item.actor_2_name}} {{=item.actor_3_name}}
+                </p>
                 <div style="display:inline-block">
                     <img style="width: 140px;height: 200px;float:left" src={{=item.movie_poster_link}}>
                     <div class="movies-text-inline" style="padding-left: 160px">

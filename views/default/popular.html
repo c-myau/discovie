@@ -36,7 +36,12 @@
         <div class="row" id="movies-containers">
             <div>
                 <h3> {{=item.movie_title}} ({{=item.content_rating}})</h3>
-                <p><b>Directed By {{=item.director_name}}</b></p>
+                <p><b>Directed By: </b>{{=item.director_name}}
+                    <b>Movie's budget: </b>{{=item.budget}}
+                    <b>IMDB Score: </b>{{=item.imdb_score}}</p>
+                <p>
+                    <b>Actors' name(s): </b> {{=item.actor_1_name}} {{=item.actor_2_name}} {{=item.actor_3_name}}
+                </p>
                 <div style="display:inline-block">
                     <img style="max-width:15%;height:auto;float:left" src={{=item.movie_poster_link}}>
                     <div class="movies-text-inline" style="padding-left: 160px">
