@@ -35,7 +35,7 @@ def index():
         i += 1
     movie_list = []
     j = 0
-    for row in db().select(db.movie_metadata.ALL, limitby=(0, 100)):
+    for row in db().select(db.movie_metadata.ALL):
         movie_list.append(row)
         j += 1
     randm1 = []
