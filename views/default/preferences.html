@@ -49,8 +49,8 @@
                         <i v-if="idx > movie.num_stars_display" class="fa fa-star-o fa-lg"></i>
                         <i v-if="movie._pending" class="fa fa-spinner fa-spin"></i>
                     </span><br></br>
-                    <button class="btn blue" v-on:click="pay()"><i class="fa fa-bookmark"></i> Bookmark</button>
-                    <button class="btn blue" v-on:click="pay()"><i class="fa fa-eye-slash"></i> Watched</button>
+                    <button class="btn blue" v-on:click="bookmark()"><i class="fa fa-bookmark"></i> Bookmark</button>
+                    <button class="btn blue" v-on:click="hide()"><i class="fa fa-eye-slash"></i> Watched</button>
 
                 </span>
                     </div>
