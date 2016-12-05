@@ -13,7 +13,6 @@
 
 <div class="main_content">
     <div class="user-preference-top">
-
         <!-- Login -->
         <div class="user-pref-login">
             <a href="{{=URL('default', 'index')}}" class="btn btn-success">
@@ -27,9 +26,8 @@
         {{pass}}
         </div>
     </div>
-
-        <h1 class="main_title text-center" style="color: white; padding-left: 150px">User Preferences</h1>
-        <p class="explanation text-center" style="color: white">This page will help you create a movie preference!</p>
+    <h1 class="main_title text-center" style="color: white; padding-left: 150px">User Preferences</h1>
+    <p class="explanation text-center" style="color: white">This page will help you create a movie preference!</p>
 </div>
 
 <!-- Posters -->
@@ -41,16 +39,19 @@
             <div class="row">
                 <div class="container col-xs-10">
                     <img v-bind:src="movie.url" style="height:500px"/>
-                    <h5>${movie.title}</h5>
-                    <div v-if="is_logged_in">
+                    <h5 align="center">${movie.title}</h5>
+                    <div v-if="is_logged_in" align="center">
                 <span v-on:mouseout="mouse_out(movie._idx)">
                     <span v-on:mouseover="mouse_over(movie._idx, idx)"
                           v-on:click="set_stars(movie._idx, idx)"
                           v-for="idx in star_indices">
-                        <i v-if="idx <= movie.num_stars_display" class="fa fa-star"></i>
-                        <i v-if="idx > movie.num_stars_display" class="fa fa-star-o"></i>
-                    </span>
-                    <i v-if="movie._pending" class="fa fa-spinner fa-spin"></i>
+                        <i v-if="idx <= movie.num_stars_display" class="fa fa-star fa-lg"></i>
+                        <i v-if="idx > movie.num_stars_display" class="fa fa-star-o fa-lg"></i>
+                        <i v-if="movie._pending" class="fa fa-spinner fa-spin"></i>
+                    </span><br></br>
+                    <button class="btn blue" v-on:click="pay()"><i class="fa fa-bookmark"></i> Bookmark</button>
+                    <button class="btn blue" v-on:click="pay()"><i class="fa fa-eye-slash"></i> Watched</button>
+
                 </span>
                     </div>
                 </div>

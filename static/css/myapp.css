@@ -119,6 +119,7 @@
     color: inherit;
     background-color: #f8f5f0;
     border-radius: 6px;
+    word-wrap:break-word;
 }
 
 .synopsis {
