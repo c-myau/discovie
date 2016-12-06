@@ -10,7 +10,7 @@
 # Web2py 
 / cache/*
 /errors/
-/sessions/
+/sessions/d
 / private /
 
 # Mac
