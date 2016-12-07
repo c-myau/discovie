@@ -8,10 +8,11 @@
 *.log
 
 # Web2py 
-/ cache/*
+ /cache/*
 /errors/
-/sessions/d
-/ private /
+/sessions/
+/private/
+
 
 # Mac
 .DS_Store
