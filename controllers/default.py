@@ -135,7 +135,7 @@ def directors():
 
 def genres():
     genre = request.args[0]
-    rows = db(db.movie_metadata.genres.contains(genre)).select(limitby=(0, 100))
+    rows = db(db.movie_metadata.genres.contains(genre)).select()
     return dict(rows=rows)
 
 
