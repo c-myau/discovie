@@ -83,7 +83,6 @@ def _():
             (T('Short'), False, URL('discovie', 'default', 'genres', args=['Short'])),
             (T('Film-Noir'), False, URL('discovie', 'default', 'genres', args=['Film-Noir'])),
         ]),
-        (T('Bookmarked Movies'), False, URL('discovie', 'default', 'bookmark')),
         # (T('This App'), False, '#', [
         #     (T('Design'), False, URL('admin', 'default', 'design/%s' % app)),
         #     LI(_class="divider"),

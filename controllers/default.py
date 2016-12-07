@@ -56,7 +56,7 @@ def preferences():
     """
     Suggests movie, add like movie to database, dislike movie to database:
     """
-    rows = db().select(db.movie_metadata.ALL, orderby='<random>', limitby=(0, 25))
+    rows = db().select(db.movie_metadata.ALL, orderby='<random>', limitby=(0, 50))
     return dict(rows=rows)
 
 
@@ -135,18 +135,18 @@ def directors():
 
 def genres():
     genre = request.args[0]
-    rows = db(db.movie_metadata.genres.contains(genre)).select(limitby=(0, 25))
+    rows = db(db.movie_metadata.genres.contains(genre)).select(limitby=(0, 100))
     return dict(rows=rows)
 
 
 def popular():
-    rows = db(db.movie_metadata.movie_facebook_likes).select(limitby=(0, 25),
+    rows = db(db.movie_metadata.movie_facebook_likes).select(limitby=(0, 100),
                                                              orderby=~db.movie_metadata.movie_facebook_likes)
     return dict(rows=rows)
 
 
 def top():
-    rows = db(db.movie_metadata.imdb_score).select(limitby=(0, 25), orderby=~db.movie_metadata.imdb_score)
+    rows = db(db.movie_metadata.imdb_score).select(limitby=(0, 100), orderby=~db.movie_metadata.imdb_score)
     return dict(rows=rows)
 
 
